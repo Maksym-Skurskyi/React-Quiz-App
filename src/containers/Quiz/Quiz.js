@@ -98,8 +98,8 @@ class Quiz extends Component {
 				<div className={classes.QuizWrapper}>
 					<h1>Answer all the questions</h1>
 					{this.state.isFinished ? (
-						<FinishedQuiz 
-						results={this.state.results}
+						<FinishedQuiz
+							results={this.state.results}
 							quiz={this.state.quiz}
 							onRetry={this.retryHandler}
 						/>
