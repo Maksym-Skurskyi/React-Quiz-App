@@ -1,16 +1,17 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Button from "../UI/Button/Button"
 import classes from "./FinishedQuiz.module.css"
 
 const FinishedQuiz = props => {
 	const successCount = Object.keys(props.results).reduce((total, key) => {
-		if (props.results[key] === 'success') {
+		if (props.results[key] === "success") {
 			total++
 		}
 
 		return total
 	}, 0)
-	
+
 	return (
 		<div className={classes.FinishedQuiz}>
 			<ul>
@@ -18,7 +19,7 @@ const FinishedQuiz = props => {
 					const cls = [
 						"fa",
 						props.results[quizItem.id] === "error" ? "fa-times" : "fa-check",
-						classes[props.results[quizItem.id]]
+						classes[props.results[quizItem.id]],
 					]
 
 					return (
@@ -31,11 +32,17 @@ const FinishedQuiz = props => {
 				})}
 			</ul>
 
-			<p>Correct {successCount} of {props.quiz.length}</p>
+			<p>
+				Correct {successCount} of {props.quiz.length}
+			</p>
 
 			<div>
-				<Button onClick={props.onRetry} type="primary">Try again</Button>
-				<Button type="success">Check other tests</Button>
+				<Button onClick={props.onRetry} type="primary">
+					Try again
+				</Button>
+				<Link to={'/'}>
+					<Button type="success">Check other tests</Button>
+				</Link>
 			</div>
 		</div>
 	)
