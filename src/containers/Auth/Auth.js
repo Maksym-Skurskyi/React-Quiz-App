@@ -3,8 +3,11 @@ import React, { Component } from "react"
 import Button from "../../components/UI/Button/Button"
 import Input from "../../components/UI/Input/Input"
 import is from "is_js"
+import axios from "axios"
+import { connect } from "react-redux"
+import { auth } from "../../store/actions/auth"
 
-export default class Auth extends Component {
+class Auth extends Component {
 	state = {
 		isFormValid: false,
 		formControls: {
@@ -35,8 +38,20 @@ export default class Auth extends Component {
 		},
 	}
 
-	loginHandler = () => {}
-	registerHandler = () => {}
+	loginHandler = () => {
+		this.props.auth(
+			this.state.formControls.email.value,
+			this.state.formControls.password.value,
+			true
+		)
+	}
+	registerHandler = () => {
+		this.props.auth(
+			this.state.formControls.email.value,
+			this.state.formControls.password.value,
+			false
+		)
+	}
 	submitHandler = e => {
 		e.preventDefault()
 	}
@@ -119,7 +134,10 @@ export default class Auth extends Component {
 							disabled={!this.state.isFormValid}>
 							Sign in
 						</Button>
-						<Button type="primary" onClick={this.registerHandler} disabled={!this.state.isFormValid}>
+						<Button
+							type="primary"
+							onClick={this.registerHandler}
+							disabled={!this.state.isFormValid}>
 							Sign up
 						</Button>
 					</form>
@@ -128,3 +146,12 @@ export default class Auth extends Component {
 		)
 	}
 }
+
+function mapDispatchToProps(dispatch) {
+	return {
+		auth: (email, password, isLogin) =>
+			dispatch(auth(email, password, isLogin)),
+	}
+}
+
+export default connect(null, mapDispatchToProps)(Auth)
