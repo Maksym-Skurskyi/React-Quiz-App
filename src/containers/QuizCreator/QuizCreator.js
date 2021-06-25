@@ -15,8 +15,8 @@ import {
 function createOptionControl(number) {
 	return createControl(
 		{
-			label: `Вариант ${number}`,
-			errorMessage: "Значение не может быть пустым",
+			label: `Answer ${number}`,
+			errorMessage: "The field can't be empty",
 			id: number,
 		},
 		{ required: true }
@@ -27,8 +27,8 @@ function createFormControls() {
 	return {
 		question: createControl(
 			{
-				label: "Введите вопрос",
-				errorMessage: "Вопрос не может быть пустым",
+				label: "Type the question",
+				errorMessage: "The field can't be empty",
 			},
 			{ required: true }
 		),
@@ -85,14 +85,12 @@ class QuizCreator extends Component {
 	createQuizHandler = event => {
 		event.preventDefault()
 
-
 		this.setState({
 			isFormValid: false,
 			rightAnswerId: 1,
 			formControls: createFormControls(),
 		})
 		this.props.finishCreateQuiz()
-
 	}
 
 	changeHandler = (value, controlName) => {
@@ -143,7 +141,7 @@ class QuizCreator extends Component {
 	render() {
 		const select = (
 			<Select
-				label="Выберите правильный ответ"
+				label="Choose the correct answer"
 				value={this.state.rightAnswerId}
 				onChange={this.selectChangeHandler}
 				options={[
@@ -158,7 +156,7 @@ class QuizCreator extends Component {
 		return (
 			<div className={classes.QuizCreator}>
 				<div>
-					<h1>Создание теста</h1>
+					<h1>Quiz creating</h1>
 
 					<form onSubmit={this.submitHandler}>
 						{this.renderControls()}
@@ -169,14 +167,14 @@ class QuizCreator extends Component {
 							type="primary"
 							onClick={this.addQuestionHandler}
 							disabled={!this.state.isFormValid}>
-							Добавить вопрос
+							Add question
 						</Button>
 
 						<Button
 							type="success"
 							onClick={this.createQuizHandler}
 							disabled={this.props.quiz.length === 0}>
-							Создать тест
+							Create test
 						</Button>
 					</form>
 				</div>
