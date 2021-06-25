@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import axios from "../../axios/axios-quiz"
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz"
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz"
 import Loader from "../../components/UI/Loader/Loader"
