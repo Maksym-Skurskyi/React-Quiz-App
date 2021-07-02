@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import Button from "../UI/Button/Button"
-import classes from "./FinishedQuiz.module.css"
+import classes from "./FinishedQuiz.module.scss"
 
 const FinishedQuiz = props => {
 	const successCount = Object.keys(props.results).reduce((total, key) => {

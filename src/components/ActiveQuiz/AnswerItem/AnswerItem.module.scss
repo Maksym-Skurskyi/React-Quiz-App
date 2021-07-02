@@ -4,17 +4,16 @@
 	padding: 5px 10px;
 	margin-bottom: 5px;
 	cursor: pointer;
-}
-
-.AnswerItem:hover{
+&:hover{
 	background: rgba(255,255,255, .2);
 	transition: all .1s ease-in-out;
 }
 
-.AnswerItem.success{
+&.success{
 	background: rgba(161,240,69, .7)
 }
 
-.AnswerItem.error{
+&.error{
 	background: rgba(240,87,108, .7)
+}
 }

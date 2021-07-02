@@ -1,4 +1,4 @@
-import classes from "./Input.module.css"
+import classes from "./Input.module.scss"
 import React from "react"
 
 function isInvalid({ valid, touched, shouldValidate }) {
