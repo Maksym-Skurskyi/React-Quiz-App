@@ -8,13 +8,11 @@ export function auth(email, password, isLogin) {
 			password,
 			returnSecureToken: true,
 		}
-
-		let url =
-			"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDjvMrgb6fOKLXvz56mzFRUlH7nFDG4LPE"
+		const { REACT_APP_SIGNUP, REACT_APP_SIGNIN } = process.env
+		let url = REACT_APP_SIGNUP
 
 		if (isLogin) {
-			url =
-				"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDjvMrgb6fOKLXvz56mzFRUlH7nFDG4LPE"
+			url = REACT_APP_SIGNIN
 		}
 
 		const response = await axios.post(url, authData)
@@ -37,9 +35,7 @@ export function autoLogin() {
 		if (!token) {
 			dispatch(logout())
 		} else {
-			const expirationDate = new Date(
-				localStorage.getItem("expirationDate")
-			)
+			const expirationDate = new Date(localStorage.getItem("expirationDate"))
 			if (expirationDate <= new Date()) {
 				dispatch(logout())
 			} else {

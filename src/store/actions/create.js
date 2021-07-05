@@ -1,4 +1,4 @@
-import axios from "../../axios/axios-quiz"
+import axios from "../../api/quiz"
 import { CREATE_QUIZ_QUESTION, RESET_QUIZ_CREATION } from "./actionTypes"
 
 export function createQuizQuestion(item) {

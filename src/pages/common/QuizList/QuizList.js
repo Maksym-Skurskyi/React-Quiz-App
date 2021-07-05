@@ -30,32 +30,6 @@ const QuizList = props => {
 	)
 }
 
-// class QuizList extends Component {
-// 	renderQuizes() {
-// 		return this.props.quizes.map(quiz => {
-// 			return (
-// 				<li key={quiz.id}>
-// 					<NavLink to={`/quiz/${quiz.id}`}>{quiz.name}</NavLink>
-// 				</li>
-// 			)
-// 		})
-// 	}
-
-// 	componentDidMount() {
-// 		this.props.fetchQuizes()
-// 	}
-
-// 	render() {
-// 		return (
-// 			<div className={classes.QuizList}>
-// 				<h1>Quiz-List</h1>
-
-// 				{this.props.loading ? <Loader /> : <ul>{this.renderQuizes()}</ul>}
-// 			</div>
-// 		)
-// 	}
-// }
-
 function mapStateToProps(state) {
 	return {
 		quizes: state.quiz.quizes,

@@ -12,16 +12,6 @@ const Logout = props => {
 	return <Redirect to={"/"} />
 }
 
-// class Logout extends Component {
-// 	componentDidMount() {
-// 		this.props.logout()
-// 	}
-
-// 	render() {
-// 		return <Redirect to={"/"} />
-// 	}
-// }
-
 function mapDispatchToProps(dispatch) {
 	return {
 		logout: () => dispatch(logout()),
