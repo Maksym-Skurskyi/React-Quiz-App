@@ -3,14 +3,17 @@ import { Link } from "react-router-dom"
 import Button from "../UI/Button/Button"
 import classes from "./FinishedQuiz.module.scss"
 
-const FinishedQuiz = props => {
-	const successCount = Object.keys(props.results).reduce((total, key) => {
-		if (props.results[key] === "success") {
-			total++
-		}
+const FinishedQuiz = (props) => {
+	const successCount = Object.keys(props.results).reduce(
+		(total, key) => {
+			if (props.results[key] === "success") {
+				total++
+			}
 
-		return total
-	}, 0)
+			return total
+		},
+		0
+	)
 
 	return (
 		<div className={classes.FinishedQuiz}>
@@ -18,7 +21,9 @@ const FinishedQuiz = props => {
 				{props.quiz.map((quizItem, index) => {
 					const cls = [
 						"fa",
-						props.results[quizItem.id] === "error" ? "fa-times" : "fa-check",
+						props.results[quizItem.id] === "error"
+							? "fa-times"
+							: "fa-check",
 						classes[props.results[quizItem.id]],
 					]
 
@@ -40,7 +45,7 @@ const FinishedQuiz = props => {
 				<Button onClick={props.onRetry} type="primary">
 					Try again
 				</Button>
-				<Link to={'/'}>
+				<Link to={"/"}>
 					<Button type="success">Check other tests</Button>
 				</Link>
 			</div>
