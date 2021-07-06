@@ -43,7 +43,7 @@
 				"smart-tabs"
 			],
 			"quotes": [
-				"warn",
+				"error",
 				"double",
 				{
 					"avoidEscape": true,
