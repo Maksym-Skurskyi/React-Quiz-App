@@ -50,11 +50,11 @@ class QuizCreator extends Component {
 		formControls: createFormControls(),
 	}
 
-	submitHandler = event => {
+	submitHandler = (event) => {
 		event.preventDefault()
 	}
 
-	addQuestionHandler = event => {
+	addQuestionHandler = (event) => {
 		event.preventDefault()
 
 		const {
@@ -86,7 +86,7 @@ class QuizCreator extends Component {
 		})
 	}
 
-	createQuizHandler = event => {
+	createQuizHandler = (event) => {
 		event.preventDefault()
 
 		this.setState({
@@ -103,7 +103,10 @@ class QuizCreator extends Component {
 
 		control.touched = true
 		control.value = value
-		control.valid = validate(control.value, control.validation)
+		control.valid = validate(
+			control.value,
+			control.validation
+		)
 
 		formControls[controlName] = control
 
@@ -114,29 +117,34 @@ class QuizCreator extends Component {
 	}
 
 	renderControls() {
-		return Object.keys(this.state.formControls).map((controlName, index) => {
-			const control = this.state.formControls[controlName]
+		return Object.keys(this.state.formControls).map(
+			(controlName, index) => {
+				const control = this.state.formControls[controlName]
 
-			return (
-				<Auxiliary key={controlName + index}>
-					<Input
-						label={control.label}
-						value={control.value}
-						valid={control.valid}
-						shouldValidate={!!control.validation}
-						touched={control.touched}
-						errorMessage={control.errorMessage}
-						onChange={event =>
-							this.changeHandler(event.target.value, controlName)
-						}
-					/>
-					{index === 0 ? <hr /> : null}
-				</Auxiliary>
-			)
-		})
+				return (
+					<Auxiliary key={controlName + index}>
+						<Input
+							label={control.label}
+							value={control.value}
+							valid={control.valid}
+							shouldValidate={!!control.validation}
+							touched={control.touched}
+							errorMessage={control.errorMessage}
+							onChange={(event) =>
+								this.changeHandler(
+									event.target.value,
+									controlName
+								)
+							}
+						/>
+						{index === 0 ? <hr /> : null}
+					</Auxiliary>
+				)
+			}
+		)
 	}
 
-	selectChangeHandler = event => {
+	selectChangeHandler = (event) => {
 		this.setState({
 			rightAnswerId: +event.target.value,
 		})
@@ -168,16 +176,18 @@ class QuizCreator extends Component {
 						{select}
 
 						<Button
-							type='primary'
+							type="primary"
 							onClick={this.addQuestionHandler}
-							disabled={!this.state.isFormValid}>
+							disabled={!this.state.isFormValid}
+						>
 							Add question
 						</Button>
 
 						<Button
 							type="success"
 							onClick={this.createQuizHandler}
-							disabled={this.props.quiz.length === 0}>
+							disabled={this.props.quiz.length === 0}
+						>
 							Create test
 						</Button>
 					</form>
@@ -325,7 +335,6 @@ class QuizCreator extends Component {
 // 	)
 // }
 
-
 function mapStateToProps(state) {
 	return {
 		quiz: state.create.quiz,
@@ -334,9 +343,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		createQuizQuestion: item => dispatch(createQuizQuestion(item)),
+		createQuizQuestion: (item) =>
+			dispatch(createQuizQuestion(item)),
 		finishCreateQuiz: () => dispatch(finishCreateQuiz()),
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizCreator)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(QuizCreator)
