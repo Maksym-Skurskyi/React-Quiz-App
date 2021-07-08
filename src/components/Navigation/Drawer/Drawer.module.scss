@@ -22,7 +22,9 @@
 	ul li {
 		margin-bottom: 15px;
 	}
-	ul li a {
+	ul li a,
+	ul li button {
+		display: flex;
 		color: #363d54;
 		font-size: 30px;
 		background-color: #fff;
@@ -30,6 +32,8 @@
 		padding: 0 20px 10px 20px;
 		transition: all 0.3s;
 		text-decoration: none;
+		border: none;
+		cursor: pointer;
 
 		&:hover,
 		&.active {

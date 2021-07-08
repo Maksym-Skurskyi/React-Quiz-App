@@ -1,27 +1,22 @@
-import Layout from "./hocs/Layout/Layout"
-import { connect } from "react-redux"
-import { useEffect } from "react"
-import { withRouter } from "react-router-dom"
-import { autoLogin } from "./store/actions/auth"
 import Routes from "./routes/routes"
+import { AuthProvider } from "./hocs/contexts/AuthContext"
+import { BrowserRouter } from "react-router-dom"
+import { store } from "./store"
+import { Provider } from "react-redux"
+import Layout from "./hocs/Layout"
 
-const App = props => {
-	useEffect(() => {
-		props.autoLogin()
-		// eslint-disable-next-line
-	}, [])
-
+const App = () => {
 	return (
-		<Layout>
-			<Routes />
-		</Layout>
+		<Provider store={store}>
+			<BrowserRouter>
+				<AuthProvider>
+					<Layout>
+						<Routes />
+					</Layout>
+				</AuthProvider>
+			</BrowserRouter>
+		</Provider>
 	)
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		autoLogin: () => dispatch(autoLogin()),
-	}
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default App

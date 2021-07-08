@@ -1,8 +1,8 @@
 import React, {  useEffect } from "react"
 import { connect } from "react-redux"
-import ActiveQuiz from "../../../components/ActiveQuiz/ActiveQuiz"
-import FinishedQuiz from "../../../components/FinishedQuiz/FinishedQuiz"
-import Loader from "../../../components/UI/Loader/Loader"
+import ActiveQuiz from "../../../components/quizLayouts/ActiveQuiz"
+import FinishedQuiz from "../../../components/quizLayouts/FinishedQuiz"
+import Loader from "../../../components/UI/Loader"
 import {
 	fetchQuizById,
 	quizAnswerClick,
@@ -11,6 +11,7 @@ import {
 import classes from "./Quiz.module.scss"
 
 const Quiz = (props) => {
+	
 	useEffect(() => {
 		props.fetchQuizById(props.match.params.id)
 		return () => {

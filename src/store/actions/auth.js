@@ -18,11 +18,6 @@ export function auth(email, password, isLogin) {
 		const response = await axios.post(url, authData)
 		const data = response.data
 
-		const expirationDate = new Date(new Date().getTime() + data.expires * 1000)
-
-		localStorage.setItem("token", data.idToken)
-		localStorage.setItem("userId", data.localId)
-		localStorage.setItem("expirationDate", expirationDate)
 
 		dispatch(authSuccess(data.idToken))
 		dispatch(autoLogout(data.expiresIn))

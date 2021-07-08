@@ -1,11 +1,15 @@
 import classes from "./Input.module.scss"
 import React from "react"
 
-function isInvalid({ valid, touched, shouldValidate }) {
+function isInvalid({
+	valid,
+	touched,
+	shouldValidate,
+}) {
 	return !valid && shouldValidate && touched
 }
 
-const Input = props => {
+const Input = (props) => {
 	const inputType = props.type || "text"
 	const cls = [classes.Input]
 	const htmlFor = `${inputType}-${Math.random()}`
@@ -16,7 +20,9 @@ const Input = props => {
 
 	return (
 		<div className={cls.join(" ")}>
-			<label htmlFor={htmlFor}>{props.label}</label>
+			<label htmlFor={htmlFor}>
+				{props.label}
+			</label>
 			<input
 				type={inputType}
 				id={htmlFor}
@@ -25,7 +31,10 @@ const Input = props => {
 			/>
 
 			{isInvalid(props) ? (
-				<span>{props.errorMessage || "Some data is wrong :("}</span>
+				<span>
+					{props.errorMessage ||
+						"Some data is wrong :("}
+				</span>
 			) : null}
 		</div>
 	)
