@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-import { connect } from "react-redux"
 import {
 	Redirect,
 	Route,
@@ -39,13 +38,4 @@ const Routes = () => {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		isAuthenticated: !!state.auth.token,
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	null
-)(Routes)
+export default Routes

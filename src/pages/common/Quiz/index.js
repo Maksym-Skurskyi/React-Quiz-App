@@ -1,5 +1,5 @@
-import React, {  useEffect } from "react"
-import { connect } from "react-redux"
+import React, { useEffect } from "react"
+import { connect, useDispatch, useStore } from "react-redux"
 import ActiveQuiz from "../../../components/quizLayouts/ActiveQuiz"
 import FinishedQuiz from "../../../components/quizLayouts/FinishedQuiz"
 import Loader from "../../../components/UI/Loader"
@@ -11,11 +11,13 @@ import {
 import classes from "./Quiz.module.scss"
 
 const Quiz = (props) => {
-	
+	const dispatch = useDispatch()
+	const quiz = useStore().getState().quiz
+
 	useEffect(() => {
-		props.fetchQuizById(props.match.params.id)
+		dispatch(fetchQuizById(props.match.params.id))
 		return () => {
-			props.retryQuiz()
+			dispatch(retryQuiz())
 		}
 		// eslint-disable-next-line
 	}, [])
@@ -25,22 +27,32 @@ const Quiz = (props) => {
 			<div className={classes.QuizWrapper}>
 				<h1>Answer all the questions</h1>
 
-				{props.loading || !props.quiz ? (
+				{quiz.loading || !quiz.quiz ? (
 					<Loader />
-				) : props.isFinished ? (
+				) : quiz.isFinished ? (
 					<FinishedQuiz
-						results={props.results}
-						quiz={props.quiz}
-						onRetry={props.retryQuiz}
+						results={quiz.results}
+						quiz={quiz.quiz}
+						onRetry={quiz.retryQuiz}
 					/>
 				) : (
 					<ActiveQuiz
-						answers={props.quiz[props.activeQuestion].answers}
-						question={props.quiz[props.activeQuestion].question}
-						onAnswerClick={props.quizAnswerClick}
-						quizLength={props.quiz.length}
-						answerNumber={props.activeQuestion + 1}
-						state={props.answerState}
+						answers={
+							quiz.quiz[quiz.activeQuestion]
+								.answers
+						}
+						question={
+							quiz.quiz[quiz.activeQuestion]
+								.question
+						}
+						onAnswerClick={() => {
+							dispatch(quizAnswerClick())
+						}}
+						quizLength={quiz.quiz.length}
+						answerNumber={
+							quiz.activeQuestion + 1
+						}
+						state={quiz.answerState}
 					/>
 				)}
 			</div>
@@ -50,21 +62,13 @@ const Quiz = (props) => {
 
 function mapStateToProps(state) {
 	return {
-		results: state.quiz.results,
-		isFinished: state.quiz.isFinished,
-		activeQuestion: state.quiz.activeQuestion,
-		answerState: state.quiz.answerState,
 		quiz: state.quiz.quiz,
-		loading: state.quiz.loading,
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		fetchQuizById: id => dispatch(fetchQuizById(id)),
-		quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId)),
-		retryQuiz: () => dispatch(retryQuiz()),
-	}
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz)
+
+export default connect(
+	mapStateToProps,
+	null
+)(Quiz)

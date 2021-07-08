@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import Button from "../../UI/Button"
 import classes from "./FinishedQuiz.module.scss"
 
 const FinishedQuiz = (props) => {
@@ -42,15 +41,15 @@ const FinishedQuiz = (props) => {
 			</p>
 
 			<div>
-				<Button
+				<button
 					onClick={props.onRetry}
 				>
 					Try again
-				</Button>
+				</button>
 				<Link to={"/"}>
-					<Button>
+					<button>
 						Check other tests
-					</Button>
+					</button>
 				</Link>
 			</div>
 		</div>

@@ -34,8 +34,6 @@ const QuizCreator = () => {
 				}
 			}
 		)
-		console.log(values)
-		console.log(vals)
 		dispatch(finishCreateQuiz(vals))
 	}
 

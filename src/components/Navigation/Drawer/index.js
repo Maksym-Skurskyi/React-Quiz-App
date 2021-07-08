@@ -4,7 +4,6 @@ import { useAuth } from "../../../hocs/contexts/AuthContext"
 import { privateMenu } from "../../menus/privateMenu"
 import { publicMenu } from "../../menus/publicMenu"
 import Backdrop from "../../UI/Backdrop"
-import Button from "../../UI/Button"
 import classes from "./Drawer.module.scss"
 
 const Drawer = ({ onClose, isOpen }) => {
@@ -25,9 +24,14 @@ const Drawer = ({ onClose, isOpen }) => {
 			return (
 				<li key={index}>
 					{link.type === "button" ? (
-						<Button onClick={handleLogout}>
+						<button
+							onClick={() => {
+								handleLogout()
+								onClose()
+							}}
+						>
 							{link.label}
-						</Button>
+						</button>
 					) : (
 						<NavLink
 							to={link.to}
