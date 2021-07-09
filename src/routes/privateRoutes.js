@@ -1,8 +1,17 @@
 import { lazy } from "react"
 
-const QuizCreator = lazy(() => import("../pages/common/QuizCreator"))
-const Quiz = lazy(() => import("../pages/common/Quiz"))
-const QuizList = lazy(() => import("../pages/common/QuizList"))
+const QuizCreator = lazy(() =>
+	import("../pages/common/QuizCreator")
+)
+const Quiz = lazy(() =>
+	import("../pages/common/Quiz")
+)
+const QuizList = lazy(() =>
+	import("../pages/common/QuizList")
+)
+const NotFound = lazy(() =>
+	import("../pages/common/NotFound")
+)
 
 export const privateRoutes = [
 	{
@@ -19,5 +28,8 @@ export const privateRoutes = [
 		component: QuizList,
 		path: "/",
 		exact: true,
+	},
+	{
+		component: NotFound,
 	},
 ]

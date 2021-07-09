@@ -11,22 +11,56 @@
 
 ## Try it now https://quizonreact.web.app/
 
-### Available Scripts
+### How to add the Web SDKs to your app
+Have a glance at the docs here:
+https://firebase.google.com/docs/web/learn-more?authuser=1#modular-version
 
-In the project directory, you can run:
+1) Go to your Firebase Project settings
+2) In "SDK setup and configuration" choose "CDN" option
+![setup](https://user-images.githubusercontent.com/77164933/125078964-c4393b00-e0cb-11eb-8c8e-69f241edd403.png)
+3) Copy your own values to the environmental variables in file .env.dist
+
+### Variables
+Quotes don't matter, just put your values ↓
+```
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_DATABASE_URL=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_APP_ID=
+REACT_APP_FIREBASE_MEASUREMENT_ID=
+```
+### How to turn on Authentication
+You can check the Firebase docs:
+https://firebase.google.com/docs/auth/web/start
+
+Everything is ready to go, just do a few steps:
+1) Turn on Social Login
+![auth](https://user-images.githubusercontent.com/77164933/125080359-63aafd80-e0cd-11eb-9512-07a8f12f293d.png)
+2) Allow to signup and keep Email link disabled
+![authCheckboxes](https://user-images.githubusercontent.com/77164933/125080542-981eb980-e0cd-11eb-8216-aa17f912603d.png)
+
+
+### Available Scripts
 
 #### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Runs the app in the development mode.
 
 #### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### `npm run lint:fix`
+
+Fixes lint issues.
+
+#### `npm run prepare`
+
+Prepares Husky config installing.
+
+#### `npm run deploy`
+
+Builds the app for production and deploys on Firebase

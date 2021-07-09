@@ -1,12 +1,13 @@
-import React, {
+import {
+	createContext,
 	useContext,
 	useEffect,
 	useState,
 } from "react"
-import Loader from "../../../components/UI/Loader"
-import { auth } from "../../../firebase"
+import Loader from "../../../components/common/UI/Loader"
+import { auth } from "../../../config/firebase"
 
-const AuthContext = React.createContext()
+const AuthContext = createContext()
 
 export const useAuth = () => {
 	return useContext(AuthContext)

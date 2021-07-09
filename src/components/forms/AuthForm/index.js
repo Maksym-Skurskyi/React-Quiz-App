@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import classes from "./AuthForm.module.scss"
-import FormInput from "../../UI/FormInput"
+import FormInput from "../../common/UI/FormInput"
 const AuthForm = ({
 	btnText,
 	onSubmit,

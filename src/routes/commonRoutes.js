@@ -11,9 +11,10 @@ const Quiz = lazy(() =>
 	import("../pages/common/Quiz")
 )
 const QuizList = lazy(() =>
-	import(
-		"../pages/common/QuizList"
-	)
+	import("../pages/common/QuizList")
+)
+const NotFound = lazy(() =>
+	import("../pages/common/NotFound")
 )
 
 export const commonRoutes = [
@@ -36,5 +37,8 @@ export const commonRoutes = [
 		component: QuizList,
 		path: "/",
 		exact: true,
+	},
+	{
+		component: NotFound,
 	},
 ]

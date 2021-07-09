@@ -3,18 +3,18 @@ import classes from "./QuizList.module.scss"
 import { NavLink } from "react-router-dom"
 import {
 	useDispatch,
-	useStore,
+	useSelector,
 } from "react-redux"
-import { fetchQuizes } from "../../../store/actions/quiz"
-import Loader from "../../../components/UI/Loader"
+import { fetchQuizes } from "../../../redux/quiz/actions"
+import Loader from "../../../components/common/UI/Loader"
 
 const QuizList = () => {
 	const dispatch = useDispatch()
-	const store = useStore()
-
-	const loading = store.getState().quiz.loading
-	const quizes = store.getState().quiz.quizes
-
+	
+	const quizes = useSelector(state => state.quizes.quizes)
+	const loading = useSelector(state => state.quizes.loading)
+	console.log(quizes)
+	
 	useEffect(() => {
 		dispatch(fetchQuizes())
 		// eslint-disable-next-line
@@ -41,9 +41,9 @@ const QuizList = () => {
 			) : (
 				<ul>
 					{quizes ? (
-						<li>No quizes yet</li>
-					) : (
 						renderQuizes()
+					) : (
+						<li>No quizes yet</li>
 					)}
 				</ul>
 			)}

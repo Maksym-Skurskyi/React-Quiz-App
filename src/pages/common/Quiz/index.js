@@ -1,21 +1,31 @@
 import React, { useEffect } from "react"
-import { connect, useDispatch, useStore } from "react-redux"
-import ActiveQuiz from "../../../components/quizLayouts/ActiveQuiz"
-import FinishedQuiz from "../../../components/quizLayouts/FinishedQuiz"
-import Loader from "../../../components/UI/Loader"
+import {
+	useDispatch,
+	useSelector,
+} from "react-redux"
+import { useParams } from "react-router-dom"
+import ActiveQuiz from "../../../components/common/quizLayouts/ActiveQuiz"
+import FinishedQuiz from "../../../components/common/quizLayouts/FinishedQuiz"
+import Loader from "../../../components/common/UI/Loader"
 import {
 	fetchQuizById,
-	quizAnswerClick,
 	retryQuiz,
-} from "../../../store/actions/quiz"
+} from "../../../redux/quiz/actions"
 import classes from "./Quiz.module.scss"
 
-const Quiz = (props) => {
+const Quiz = () => {
 	const dispatch = useDispatch()
-	const quiz = useStore().getState().quiz
+	const quizes = useSelector(
+		(state) => state.quizes
+	)
+	const dispatchRetryQuiz = () => {
+		dispatch(retryQuiz())
+	}
+
+	const { id } = useParams()
 
 	useEffect(() => {
-		dispatch(fetchQuizById(props.match.params.id))
+		dispatch(fetchQuizById(id))
 		return () => {
 			dispatch(retryQuiz())
 		}
@@ -27,48 +37,18 @@ const Quiz = (props) => {
 			<div className={classes.QuizWrapper}>
 				<h1>Answer all the questions</h1>
 
-				{quiz.loading || !quiz.quiz ? (
+				{quizes.loading || !quizes.quiz ? (
 					<Loader />
-				) : quiz.isFinished ? (
+				) : quizes.isFinished ? (
 					<FinishedQuiz
-						results={quiz.results}
-						quiz={quiz.quiz}
-						onRetry={quiz.retryQuiz}
+						onRetry={dispatchRetryQuiz}
 					/>
 				) : (
-					<ActiveQuiz
-						answers={
-							quiz.quiz[quiz.activeQuestion]
-								.answers
-						}
-						question={
-							quiz.quiz[quiz.activeQuestion]
-								.question
-						}
-						onAnswerClick={() => {
-							dispatch(quizAnswerClick())
-						}}
-						quizLength={quiz.quiz.length}
-						answerNumber={
-							quiz.activeQuestion + 1
-						}
-						state={quiz.answerState}
-					/>
+					<ActiveQuiz />
 				)}
 			</div>
 		</div>
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		quiz: state.quiz.quiz,
-	}
-}
-
-
-
-export default connect(
-	mapStateToProps,
-	null
-)(Quiz)
+export default Quiz

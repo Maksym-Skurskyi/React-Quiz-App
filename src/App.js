@@ -1,7 +1,7 @@
 import Routes from "./routes/routes"
 import { AuthProvider } from "./hocs/contexts/AuthContext"
 import { BrowserRouter } from "react-router-dom"
-import { store } from "./store"
+import {store} from "./redux/store"
 import { Provider } from "react-redux"
 import Layout from "./hocs/Layout"
 
