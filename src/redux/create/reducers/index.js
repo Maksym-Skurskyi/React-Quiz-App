@@ -1,6 +1,8 @@
 import {
 	CREATE_QUIZ_QUESTION,
-	RESET_QUIZ_CREATION,
+	FINISH_CREATE_QUIZ_ERROR,
+	FINISH_CREATE_QUIZ_START,
+	FINISH_CREATE_QUIZ_SUCCESS,
 } from "../types"
 
 const initialState = {
@@ -17,8 +19,23 @@ export default function createReducer(
 				...state,
 				quiz: [...state.quiz, action.item],
 			}
-		case RESET_QUIZ_CREATION:
-			return { ...state, quiz: [] }
+		case FINISH_CREATE_QUIZ_START:
+			return {
+				...state,
+				loading: true,
+			}
+		case FINISH_CREATE_QUIZ_ERROR:
+			return {
+				...state,
+				loading: false,
+				error: action.payload,
+			}
+		case FINISH_CREATE_QUIZ_SUCCESS:
+			return {
+				...state,
+				quiz: [],
+				loading: false,
+			}
 		default:
 			return state
 	}

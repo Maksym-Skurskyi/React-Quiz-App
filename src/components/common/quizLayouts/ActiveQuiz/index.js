@@ -12,11 +12,6 @@ const ActiveQuiz = () => {
 	const quizLength = quizes.quiz.length
 	const answerNumber = quizes.activeQuestion + 1
 
-	const quiz = useSelector(
-		(state) => state.quizes
-	)
-	console.log(quiz)
-
 	return (
 		<div className={classes.ActiveQuiz}>
 			<p className={classes.Question}>

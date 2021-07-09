@@ -5,10 +5,8 @@ import { useSelector } from "react-redux"
 
 const AnswersList = ({questionId}) => {
 	const answers = useSelector(
-		// instead of hard-coded 0 needs to be a question id
 		(state) => state.quizes.quiz[questionId].answers
 	)
-	console.log(answers)
 
 	return (
 		<ul className={classes.AnswersList}>

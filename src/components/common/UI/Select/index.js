@@ -1,7 +1,7 @@
 import React from "react"
 import classes from "./Select.module.scss"
 
-const Select = ({label, values, onChange, options}) => {
+const Select = ({label, value, onChange, options}) => {
 	const htmlFor = `${label}-${Math.random()}`
 
 	return (
