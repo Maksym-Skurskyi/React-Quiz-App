@@ -1,4 +1,3 @@
-import React from "react"
 import classes from "./AnswersList.module.scss"
 import AnswerItem from "../AnswerItem"
 import { useSelector } from "react-redux"

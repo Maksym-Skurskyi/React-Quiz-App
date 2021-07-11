@@ -1,4 +1,3 @@
-import React from "react"
 import classes from "./Select.module.scss"
 
 const Select = ({label, value, onChange, options}) => {

@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import classes from "./AuthForm.module.scss"
 import FormInput from "components/common/UI/FormInput"
+import classes from "./AuthForm.module.scss"
+
 const AuthForm = ({
 	btnText,
 	onSubmit,
@@ -48,7 +49,7 @@ const AuthForm = ({
 			<button
 				type="submit"
 				disabled={loading}>
-					{btnText}
+				{btnText}
 			</button>
 		</form>
 	)
