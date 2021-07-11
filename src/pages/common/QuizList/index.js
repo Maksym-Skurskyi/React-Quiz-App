@@ -1,12 +1,12 @@
 import React, { useEffect } from "react"
-import classes from "./QuizList.module.scss"
 import { NavLink } from "react-router-dom"
 import {
 	useDispatch,
 	useSelector,
 } from "react-redux"
-import { fetchQuizes } from "../../../redux/quiz/actions"
-import Loader from "../../../components/common/UI/Loader"
+import { fetchQuizes } from "redux/quiz/actions"
+import Loader from "components/common/UI/Loader"
+import classes from "./QuizList.module.scss"
 
 const QuizList = () => {
 	const dispatch = useDispatch()

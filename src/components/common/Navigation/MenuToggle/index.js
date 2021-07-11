@@ -1,4 +1,3 @@
-import React from "react"
 import classes from "./MenuToggle.module.scss"
 
 const MenuToggle = ({isOpen, onToggle}) => {

@@ -1,16 +1,16 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import {
 	useDispatch,
 	useSelector,
 } from "react-redux"
 import { useParams } from "react-router-dom"
-import ActiveQuiz from "../../../components/common/quizLayouts/ActiveQuiz"
-import FinishedQuiz from "../../../components/common/quizLayouts/FinishedQuiz"
-import Loader from "../../../components/common/UI/Loader"
 import {
 	fetchQuizById,
 	retryQuiz,
-} from "../../../redux/quiz/actions"
+} from "redux/quiz/actions"
+import ActiveQuiz from "components/common/quizLayouts/ActiveQuiz"
+import FinishedQuiz from "components/common/quizLayouts/FinishedQuiz"
+import Loader from "components/common/UI/Loader"
 import classes from "./Quiz.module.scss"
 
 const Quiz = () => {

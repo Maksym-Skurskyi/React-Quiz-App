@@ -1,6 +1,4 @@
 import React from "react"
-import { useFormik } from "formik"
-import * as Yup from "yup"
 import {
 	Formik,
 	Field,
@@ -8,34 +6,9 @@ import {
 	ErrorMessage,
 	FieldArray,
 } from "formik"
+import classes from "./QuizCreateForm.module.scss"
 
 const QuizCreateForm = ({ onSubmit }) => {
-
-	const formik = useFormik({
-		validationSchema: Yup.object({
-			question: Yup.string()
-				.min(1, "Must be 1 character at least")
-				.required("Required"),
-			option1: Yup.string()
-				.min(1, "Must be 1 character at least")
-				.required("Required"),
-			option2: Yup.string()
-				.min(1, "Must be 1 character at least")
-				.required("Required"),
-			option3: Yup.string()
-				.min(1, "Must be 1 character at least")
-				.required("Required"),
-			option4: Yup.string()
-				.min(1, "Must be 1 character at least")
-				.required("Required"),
-			rightAnswerId: Yup.string().min(
-				1,
-				"Must be 1 character at least"
-			),
-		}),
-		onSubmit: () => {console.log(formik)},
-	})
-
 	// initialValues for quiz creating form with question and list of options
 	const initialValues = {
 		questions: [
@@ -88,98 +61,98 @@ const QuizCreateForm = ({ onSubmit }) => {
 														className="field-error"
 													/>
 												</div>
-												<div className="col">
-													<label
-														htmlFor={`questions.${index}.option1`}
-													>
-														Option1
-													</label>
-													<Field
-														name={`questions.${index}.option1`}
-														placeholder="Type an option here"
-														type="textarea"
-													/>
-													<ErrorMessage
-														name={`questions.${index}.option1`}
-														component="div"
-														className="field-error"
-													/>
-												</div>
-												<div className="col">
-													<label
-														htmlFor={`questions.${index}.option2`}
-													>
-														Option2
-													</label>
-													<Field
-														name={`questions.${index}.option2`}
-														placeholder="Type an option here"
-														type="textarea"
-													/>
-													<ErrorMessage
-														name={`questions.${index}.option2`}
-														component="div"
-														className="field-error"
-													/>
-												</div>
-												<div className="col">
-													<label
-														htmlFor={`questions.${index}.option3`}
-													>
-														Option3
-													</label>
-													<Field
-														name={`questions.${index}.option3`}
-														placeholder="Type an option here"
-														type="textarea"
-													/>
-													<ErrorMessage
-														name={`questions.${index}.option3`}
-														component="div"
-														className="field-error"
-													/>
-												</div>
-												<div className="col">
-													<label
-														htmlFor={`questions.${index}.option4`}
-													>
-														Option4
-													</label>
-													<Field
-														name={`questions.${index}.option4`}
-														placeholder="Type an option here"
-														type="textarea"
-													/>
-													<Field
-														name={`questions.${index}.hOption4`}
-														placeholder="Type an option here"
-														type="hidden"
-														value="4"
-													/>
-													<Field
-														name={`questions.${index}.hOption3`}
-														placeholder="Type an option here"
-														type="hidden"
-														value="3"
-													/>
-													<Field
-														name={`questions.${index}.hOption2`}
-														placeholder="Type an option here"
-														type="hidden"
-														value="2"
-													/>
-													<Field
-														name={`questions.${index}.hOption1`}
-														placeholder="Type an option here"
-														type="hidden"
-														value="1"
-													/>
-													<ErrorMessage
-														name={`questions.${index}.option4`}
-														component="div"
-														className="field-error"
-													/>
-												</div>
+
+												<FieldArray name="options">
+													{({ remove, push }) => (
+														<>
+															<div className="col">
+																<label
+																	htmlFor={`questions.${index}.option1`}
+																>
+																	Option1
+																</label>
+																<Field
+																	name={`questions.${index}.option1`}
+																	placeholder="Type an option here"
+																	type="textarea"
+																/>
+																<ErrorMessage
+																	name={`questions.${index}.option1`}
+																	component="div"
+																	className="field-error"
+																/>
+															</div>
+															<div className="col">
+																<label
+																	htmlFor={`questions.${index}.option2`}
+																>
+																	Option2
+																</label>
+																<Field
+																	name={`questions.${index}.option2`}
+																	placeholder="Type an option here"
+																	type="textarea"
+																/>
+																<ErrorMessage
+																	name={`questions.${index}.option2`}
+																	component="div"
+																	className="field-error"
+																/>
+																<Field
+																	name={`questions.${index}.hOption4`}
+																	placeholder="Type an option here"
+																	type="hidden"
+																	value="4"
+																/>
+																<Field
+																	name={`questions.${index}.hOption3`}
+																	placeholder="Type an option here"
+																	type="hidden"
+																	value="3"
+																/>
+																<Field
+																	name={`questions.${index}.hOption2`}
+																	placeholder="Type an option here"
+																	type="hidden"
+																	value="2"
+																/>
+																<Field
+																	name={`questions.${index}.hOption1`}
+																	placeholder="Type an option here"
+																	type="hidden"
+																	value="1"
+																/>
+															</div>
+															<div
+																className={
+																	classes.options__buttons
+																}
+															>
+																<button
+																	type="button"
+																	className="secondary option-add"
+																	onClick={() =>
+																		push({
+																			option3: "",
+																		})
+																	}
+																>
+																	Add Option
+																</button>
+																<button
+																	type="button"
+																	className="secondary option-remove"
+																	onClick={() =>
+																		remove(index)
+																	}
+																>
+																	Remove option
+																</button>
+															</div>
+														</>
+													)}
+												</FieldArray>
+
 												<div className="col">
 													<label
 														htmlFor={`questions.${index}.select`}
@@ -236,8 +209,6 @@ const QuizCreateForm = ({ onSubmit }) => {
 											question: "",
 											option1: "",
 											option2: "",
-											option3: "",
-											option4: "",
 											rightAnswerId: 1,
 										})
 									}

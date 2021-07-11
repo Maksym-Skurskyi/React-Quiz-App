@@ -1,9 +1,9 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { NavLink } from "react-router-dom"
-import { useAuth } from "../../../../hocs/contexts/AuthContext"
-import { privateMenu } from "../../menus/privateMenu"
-import { publicMenu } from "../../menus/publicMenu"
-import Backdrop from "../../UI/Backdrop"
+import { useAuth } from "hocs/contexts/AuthContext"
+import { privateMenu } from "components/common/menus/privateMenu"
+import { publicMenu } from "components/common/menus/publicMenu"
+import Backdrop from "components/common/UI/Backdrop"
 import classes from "./Drawer.module.scss"
 
 const Drawer = ({ onClose, isOpen }) => {

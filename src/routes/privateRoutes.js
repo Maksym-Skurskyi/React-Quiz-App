@@ -1,16 +1,16 @@
 import { lazy } from "react"
 
 const QuizCreator = lazy(() =>
-	import("../pages/common/QuizCreator")
+	import("pages/common/QuizCreator")
 )
 const Quiz = lazy(() =>
-	import("../pages/common/Quiz")
+	import("pages/common/Quiz")
 )
 const QuizList = lazy(() =>
-	import("../pages/common/QuizList")
+	import("pages/common/QuizList")
 )
 const NotFound = lazy(() =>
-	import("../pages/common/NotFound")
+	import("pages/common/NotFound")
 )
 
 export const privateRoutes = [

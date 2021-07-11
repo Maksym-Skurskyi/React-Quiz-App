@@ -4,9 +4,9 @@ import {
 	Route,
 	Switch,
 } from "react-router-dom"
-import Loader from "../components/common/UI/Loader"
 import { commonRoutes } from "./commonRoutes"
 import { privateRoutes } from "./privateRoutes"
+import Loader from "components/common/UI/Loader"
 
 const Routes = () => {
 	const isLogin = localStorage.getItem("isLogin")

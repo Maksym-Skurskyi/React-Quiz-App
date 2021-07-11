@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import classes from "./ActiveQuiz.module.scss"
 import AnswersList from "./AnswersList"
+import classes from "./ActiveQuiz.module.scss"
 
 const ActiveQuiz = () => {
 	const quizes = useSelector(

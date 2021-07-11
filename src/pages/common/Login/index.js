@@ -1,7 +1,7 @@
-import classes from "./Auth.module.scss"
 import React from "react"
-import { useAuth } from "../../../hocs/contexts/AuthContext"
-import AuthForm from "../../../components/forms/AuthForm"
+import { useAuth } from "hocs/contexts/AuthContext"
+import AuthForm from "components/forms/AuthForm"
+import classes from "./Auth.module.scss"
 
 const Login = () => {
 	const { login } = useAuth()

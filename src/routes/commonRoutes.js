@@ -2,19 +2,19 @@ import { lazy } from "react"
 
 // Common routes with using React code splitting approach
 const Login = lazy(() =>
-	import("../pages/common/Login")
+	import("pages/common/Login")
 )
 const Register = lazy(() =>
-	import("../pages/common/Register")
+	import("pages/common/Register")
 )
 const Quiz = lazy(() =>
-	import("../pages/common/Quiz")
+	import("pages/common/Quiz")
 )
 const QuizList = lazy(() =>
-	import("../pages/common/QuizList")
+	import("pages/common/QuizList")
 )
 const NotFound = lazy(() =>
-	import("../pages/common/NotFound")
+	import("pages/common/NotFound")
 )
 
 export const commonRoutes = [

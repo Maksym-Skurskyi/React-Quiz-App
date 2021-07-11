@@ -1,5 +1,5 @@
-import classes from "./NotFound.module.scss"
 import { NavLink } from "react-router-dom"
+import classes from "./NotFound.module.scss"
 
 const NotFound = () => {
 	return (

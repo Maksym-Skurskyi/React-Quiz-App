@@ -1,4 +1,4 @@
-import axios from "../../../api/quiz"
+import axios from "api/quiz"
 import {
 	CREATE_QUIZ_QUESTION,
 	FINISH_CREATE_QUIZ_ERROR,

@@ -3,7 +3,7 @@ import {
 	useDispatch,
 	useSelector,
 } from "react-redux"
-import { quizAnswerClick } from "../../../../../redux/quiz/actions"
+import { quizAnswerClick } from "redux/quiz/actions"
 import classes from "./AnswerItem.module.scss"
 
 const AnswerItem = ({ answer }) => {

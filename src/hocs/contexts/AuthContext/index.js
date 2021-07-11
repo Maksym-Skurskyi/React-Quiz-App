@@ -4,8 +4,8 @@ import {
 	useEffect,
 	useState,
 } from "react"
-import Loader from "../../../components/common/UI/Loader"
-import { auth } from "../../../config/firebase"
+import { auth } from "config/firebase"
+import Loader from "components/common/UI/Loader"
 
 const AuthContext = createContext()
 
