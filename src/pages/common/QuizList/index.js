@@ -13,7 +13,6 @@ const QuizList = () => {
 	
 	const quizes = useSelector(state => state.quizes.quizes)
 	const loading = useSelector(state => state.quizes.loading)
-	console.log(quizes)
 	
 	useEffect(() => {
 		dispatch(fetchQuizes())

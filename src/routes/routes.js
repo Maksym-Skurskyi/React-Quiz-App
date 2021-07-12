@@ -1,22 +1,40 @@
-import { Suspense } from "react"
 import {
-	Redirect,
+	Suspense,
+	useEffect,
+	useState,
+} from "react"
+import {
 	Route,
 	Switch,
 } from "react-router-dom"
 import { commonRoutes } from "./commonRoutes"
 import { privateRoutes } from "./privateRoutes"
+import { publicRoutes } from "./publicRoutes"
 import Loader from "components/common/UI/Loader"
 
 const Routes = () => {
-	const isLogin = localStorage.getItem("isLogin")
-	console.log(isLogin)
+	const [loggedIn, setLoggedIn] = useState(false)
+
+	useEffect(() => {
+		setLoggedIn(localStorage.getItem("isLogin"))
+		console.log("loggedIn", loggedIn)
+	}, [loggedIn])
+
+	console.log("private n public routes", [
+		...privateRoutes,
+		...publicRoutes,
+	])
 
 	return (
 		<Suspense fallback={<Loader />}>
 			<Switch>
-				{isLogin === "true"
-					? privateRoutes.map((route, index) => {
+				{loggedIn
+					? [
+							...privateRoutes,
+							...commonRoutes,
+							...publicRoutes,
+					  ].map((route, index) => {
+							console.log("route", route)
 							return (
 								<Route
 									{...route}
@@ -24,7 +42,10 @@ const Routes = () => {
 								/>
 							)
 					  })
-					: commonRoutes.map((route, index) => {
+					: [
+							...commonRoutes,
+							...publicRoutes,
+					  ].map((route, index) => {
 							return (
 								<Route
 									{...route}
@@ -32,7 +53,6 @@ const Routes = () => {
 								/>
 							)
 					  })}
-				<Redirect to="/" />
 			</Switch>
 		</Suspense>
 	)

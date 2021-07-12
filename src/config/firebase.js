@@ -1,7 +1,6 @@
 import firebase from "firebase/app"
 require("firebase/auth")
 
-
 const appConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 	authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
