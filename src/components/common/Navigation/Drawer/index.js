@@ -16,20 +16,10 @@ const Drawer = ({ onClose, isOpen }) => {
 			label: "Logout",
 			exact: false,
 			type: "button",
-			onClick: handleLogout,
+			onClick: logout,
 		})
 		// eslint-disable-next-line
 	}, [pMenu])
-
-	const handleLogout = () => {
-		logout()
-			.then(() => {
-				localStorage.setItem("isLogin", "false")
-			})
-			.catch((e) => {
-				console.log(e)
-			})
-	}
 
 	const renderLinks = (links) => {
 		return links.map((link, index) => {
@@ -38,7 +28,7 @@ const Drawer = ({ onClose, isOpen }) => {
 					{link.type === "button" ? (
 						<button
 							onClick={() => {
-								handleLogout()
+								logout()
 								onClose()
 							}}
 						>

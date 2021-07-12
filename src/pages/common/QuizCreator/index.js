@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { finishCreateQuiz } from "redux/create/actions"
+import { finishCreateQuiz } from "redux/quizCreate/actions"
 import QuizCreateForm from "components/forms/QuizCreateForm"
 import classes from "./QuizCreator.module.scss"
 

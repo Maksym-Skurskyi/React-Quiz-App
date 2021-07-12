@@ -13,7 +13,7 @@ const AuthForm = ({
 	loading,
 	btnText,
 }) => {
-	const { loginWithGoogle } = useAuth()
+	const { googleAuth, githubAuth } = useAuth()
 
 	// eslint-disable-next-line
 	const [error, setError] = useState("")
@@ -57,8 +57,13 @@ const AuthForm = ({
 				loading={loading}
 			/>
 			<SocialLogin
-				fn={loginWithGoogle}
+				fn={googleAuth}
 				text={"Sign in with Google"}
+				loading={loading}
+			/>
+			<SocialLogin
+				fn={githubAuth}
+				text={"Sign in with Github"}
 				loading={loading}
 			/>
 		</form>

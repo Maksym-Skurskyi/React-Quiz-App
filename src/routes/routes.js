@@ -3,10 +3,7 @@ import {
 	useEffect,
 	useState,
 } from "react"
-import {
-	Route,
-	Switch,
-} from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { commonRoutes } from "./commonRoutes"
 import { privateRoutes } from "./privateRoutes"
 import { publicRoutes } from "./publicRoutes"
@@ -24,29 +21,29 @@ const Routes = () => {
 			<Switch>
 				{loggedIn
 					? [
-							...privateRoutes,
-							...commonRoutes,
-							...publicRoutes,
-					  ].map((route, index) => {
-							console.log("route", route)
-							return (
-								<Route
-									{...route}
-									key={`r_${index}_${route.path}`}
-								/>
-							)
-					  })
+						...privateRoutes,
+						...commonRoutes,
+						...publicRoutes,
+					].map((route, index) => {
+						console.log("route", route)
+						return (
+							<Route
+								{...route}
+								key={`r_${index}_${route.path}`}
+							/>
+						)
+					})
 					: [
-							...commonRoutes,
-							...publicRoutes,
-					  ].map((route, index) => {
-							return (
-								<Route
-									{...route}
-									key={`r_${index}_${route.path}`}
-								/>
-							)
-					  })}
+						...commonRoutes,
+						...publicRoutes,
+					].map((route, index) => {
+						return (
+							<Route
+								{...route}
+								key={`r_${index}_${route.path}`}
+							/>
+						)
+					})}
 			</Switch>
 		</Suspense>
 	)
