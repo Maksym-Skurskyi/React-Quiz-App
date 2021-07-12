@@ -41,7 +41,7 @@ const QuizCreator = () => {
 		<div className={classes.QuizCreator}>
 			<div>
 				<h1>Quiz creating</h1>
-
+				
 				<QuizCreateForm
 					onSubmit={submitHandler}
 				/>

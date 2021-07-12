@@ -6,7 +6,9 @@ import classes from "./AuthForm.module.scss"
 
 const AuthForm = ({
 	btnText,
+	btnText2,
 	onSubmit,
+	handleSignInWithGoogle,
 	initialValues,
 }) => {
 	// eslint-disable-next-line
@@ -50,6 +52,12 @@ const AuthForm = ({
 				type="submit"
 				disabled={loading}>
 				{btnText}
+			</button>
+			<button
+				type="button"
+				onClick={handleSignInWithGoogle}
+				disabled={loading}>
+				{btnText2}
 			</button>
 		</form>
 	)

@@ -73,6 +73,15 @@ const Drawer = ({ onClose, isOpen }) => {
 						? renderLinks(pMenu)
 						: renderLinks(publicMenu)}
 				</ul>
+
+				{currentUser ? (
+					<div className={classes.drawer__user}>
+						Signed in with Google
+						<span> {currentUser.email}</span>
+					</div>
+				) : (
+					<div></div>
+				)}
 			</nav>
 			{isOpen && <Backdrop onClick={onClose} />}
 		</>

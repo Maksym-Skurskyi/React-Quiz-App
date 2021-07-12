@@ -1,4 +1,7 @@
 .Drawer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -11,6 +14,10 @@
 	transform: translateX(0px);
 	transition: transform 0.22s ease-in;
 	z-index: 90;
+	&__user{
+		display: flex;
+		flex-direction: column;
+	}
 	&.close {
 		transform: translateX(-300px);
 	}

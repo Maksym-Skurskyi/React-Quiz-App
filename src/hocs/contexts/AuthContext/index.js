@@ -5,8 +5,8 @@ import {
 	useState,
 } from "react"
 import { auth } from "config/firebase"
+import firebase from "firebase"
 import Loader from "components/common/UI/Loader"
-
 const AuthContext = createContext()
 
 export const useAuth = () => {
@@ -22,6 +22,14 @@ export const AuthProvider = ({ children }) => {
 			email,
 			password
 		)
+	}
+
+	const loginWithGoogle = async() => {
+		let provider = new firebase.auth.GoogleAuthProvider()
+
+		return firebase
+			.auth()
+			.signInWithPopup(provider)
 	}
 
 	const login = (email, password) => {
@@ -48,12 +56,13 @@ export const AuthProvider = ({ children }) => {
 		currentUser,
 		signup,
 		login,
-		logout
+		logout,
+		loginWithGoogle,
 	}
 
 	return (
 		<AuthContext.Provider value={value}>
-			{loading && <Loader/>}
+			{loading && <Loader />}
 			{children}
 		</AuthContext.Provider>
 	)
