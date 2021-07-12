@@ -3,6 +3,7 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import FormInput from "components/common/UI/FormInput"
 import classes from "./AuthForm.module.scss"
+import Loader from "components/common/UI/Loader"
 
 const AuthForm = ({
 	btnText,
@@ -10,11 +11,11 @@ const AuthForm = ({
 	onSubmit,
 	handleSignInWithGoogle,
 	initialValues,
+	loading,
 }) => {
 	// eslint-disable-next-line
 	const [error, setError] = useState("")
 	// eslint-disable-next-line
-	const [loading, setLoading] = useState(false)
 
 	const formik = useFormik({
 		initialValues,
@@ -29,7 +30,9 @@ const AuthForm = ({
 		onSubmit,
 	})
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<form
 			className={classes.AuthForm}
 			onSubmit={formik.handleSubmit}
@@ -48,15 +51,15 @@ const AuthForm = ({
 				cls={classes.Input}
 			/>
 
-			<button
-				type="submit"
-				disabled={loading}>
+				<button type="submit"
+					disabled={loading}>
 				{btnText}
 			</button>
 			<button
 				type="button"
 				onClick={handleSignInWithGoogle}
-				disabled={loading}>
+				disabled={loading}
+			>
 				{btnText2}
 			</button>
 		</form>

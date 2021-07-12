@@ -17,13 +17,7 @@ const Routes = () => {
 
 	useEffect(() => {
 		setLoggedIn(localStorage.getItem("isLogin"))
-		console.log("loggedIn", loggedIn)
 	}, [loggedIn])
-
-	console.log("private n public routes", [
-		...privateRoutes,
-		...publicRoutes,
-	])
 
 	return (
 		<Suspense fallback={<Loader />}>

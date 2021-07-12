@@ -9,6 +9,18 @@ import classes from "./Drawer.module.scss"
 const Drawer = ({ onClose, isOpen }) => {
 	const { currentUser, logout } = useAuth()
 
+	const pMenu = privateMenu
+
+	useEffect(() => {
+		pMenu.push({
+			label: "Logout",
+			exact: false,
+			type: "button",
+			onClick: handleLogout,
+		})
+		// eslint-disable-next-line
+	}, [pMenu])
+
 	const handleLogout = () => {
 		logout()
 			.then(() => {
@@ -52,18 +64,6 @@ const Drawer = ({ onClose, isOpen }) => {
 	if (!isOpen) {
 		cls.push(classes.close)
 	}
-
-	const pMenu = privateMenu
-
-	useEffect(() => {
-		pMenu.push({
-			label: "Logout",
-			exact: false,
-			type: "button",
-			onClick: handleLogout,
-		})
-		// eslint-disable-next-line
-	}, [pMenu])
 
 	return (
 		<>

@@ -1,7 +1,7 @@
 import "./FormInput.module.scss"
 
 const FormInput = ({ formik, type, cls }) => {
-	function capFirstLetter(word) {
+	const capFirstLetter = (word) => {
 		return word.charAt(0).toUpperCase() + word.slice(1)
 	}
 

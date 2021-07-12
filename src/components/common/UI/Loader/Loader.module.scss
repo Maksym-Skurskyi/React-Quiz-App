@@ -1,9 +1,12 @@
 .Loader {
 	display: flex;
 	align-items: center;
-	position: relative;
-	width: 80px;
-	height: 80px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%);
+	width: 100px;
+	height: 100px;
 	text-align: center;
 	margin: 0 auto;
 	div {
@@ -12,7 +15,7 @@
 		position: absolute;
 		left: 8px;
 		width: 16px;
-		background: #fff;
+		background: linear-gradient(90deg, rgba(255, 0, 0, 1), rgba(126, 0, 0, 1));
 		animation: Loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 	}
 	div:nth-child(1) {

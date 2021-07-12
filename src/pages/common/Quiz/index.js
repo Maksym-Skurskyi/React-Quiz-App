@@ -28,7 +28,7 @@ const Quiz = () => {
 		// eslint-disable-next-line
 	}, [])
 
-	const dispatchRetryQuiz = () => {
+	const getRetryQuiz = () => {
 		dispatch(retryQuiz())
 	}
 	return (
@@ -40,7 +40,7 @@ const Quiz = () => {
 					<Loader />
 				) : quizes.isFinished ? (
 					<FinishedQuiz
-						onRetry={dispatchRetryQuiz}
+						onRetry={getRetryQuiz}
 					/>
 				) : (
 					<ActiveQuiz />

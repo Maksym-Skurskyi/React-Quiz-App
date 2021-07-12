@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import AnswersList from "./AnswersList"
+import AnswersList from "../AnswersList"
 import classes from "./ActiveQuiz.module.scss"
 
 const ActiveQuiz = () => {
