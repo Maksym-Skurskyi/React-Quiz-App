@@ -1,0 +1,23 @@
+.SocialLogin {
+	margin-bottom: 15px;
+	button {
+		display: block;
+		box-sizing: border-box;
+		border: 1px solid #bebebe;
+		background: linear-gradient(90deg, rgba(223, 118, 118, 0.6), rgba(223, 204, 118, 0.6), rgba(253, 146, 5, 0.6));
+		padding: 7px;
+		min-height: 30px;
+		margin: 0 0 5px;
+		width: 100%;
+		outline: none;
+		transition: all 0.3s ease-in-out;
+		&:hover {
+			border: 1px solid #eee;
+			background: linear-gradient(90deg, rgba(223, 118, 118, 0.8), rgba(223, 204, 118, 0.8), rgba(253, 146, 5, 0.8));
+		}
+		&:active {
+			border: 1px solid #555;
+			background: linear-gradient(90deg, rgba(223, 118, 118, 1), rgba(223, 204, 118, 1), rgba(253, 146, 5, 1));
+		}
+	}
+}

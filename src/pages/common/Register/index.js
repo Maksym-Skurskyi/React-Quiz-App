@@ -8,10 +8,6 @@ const Register = () => {
 	const handleSubmit = (values) => {
 		const { email, password } = values
 		signup(email, password)
-			.then(() => {
-				localStorage.setItem("isLogin", "true")
-			})
-			.catch((e) => console.log(e))
 	}
 
 	return (
@@ -25,7 +21,7 @@ const Register = () => {
 						email: "",
 						password: "",
 					}}
-					btnText={"sign up"}
+					btnText={"Sign up"}
 				/>
 			</div>
 		</div>

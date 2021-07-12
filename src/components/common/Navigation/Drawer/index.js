@@ -76,7 +76,7 @@ const Drawer = ({ onClose, isOpen }) => {
 
 				{currentUser ? (
 					<div className={classes.drawer__user}>
-						Signed in with Google
+						Signed in as:
 						<span> {currentUser.email}</span>
 					</div>
 				) : (

@@ -10,7 +10,6 @@ import {
 } from "formik"
 
 const QuizCreateForm = ({ onSubmit }) => {
-
 	const formik = useFormik({
 		validationSchema: Yup.object({
 			question: Yup.string()
@@ -33,7 +32,9 @@ const QuizCreateForm = ({ onSubmit }) => {
 				"Must be 1 character at least"
 			),
 		}),
-		onSubmit: () => {console.log(formik)},
+		onSubmit: () => {
+			console.log(formik)
+		},
 	})
 
 	// initialValues for quiz creating form with question and list of options

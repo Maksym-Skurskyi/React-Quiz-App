@@ -52,11 +52,24 @@ export const AuthProvider = ({ children }) => {
 		return unsubscribe
 	}, [setLogoutParamsAndRedirect])
 
-	const signup = (email, password) => {
-		return auth.createUserWithEmailAndPassword(
-			email,
-			password
-		)
+	const signup = async (email, password) => {
+		return auth
+			.createUserWithEmailAndPassword(
+				email,
+				password
+			)
+			.then((result) => {
+				if (result.user) {
+					setLoginParamsAndRedirect()
+				} else {
+					setLogoutParamsAndRedirect(
+						null,
+						false,
+						"/login"
+					)
+				}
+			})
+			.catch((e) => console.log(e))
 	}
 
 	const loginWithGoogle = async () => {

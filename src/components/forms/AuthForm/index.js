@@ -4,18 +4,19 @@ import * as Yup from "yup"
 import FormInput from "components/common/UI/FormInput"
 import classes from "./AuthForm.module.scss"
 import Loader from "components/common/UI/Loader"
+import { SocialLogin } from "components/common/UI/SocialLogin"
+import { useAuth } from "hocs/contexts/AuthContext"
 
 const AuthForm = ({
-	btnText,
-	btnText2,
 	onSubmit,
-	handleSignInWithGoogle,
 	initialValues,
 	loading,
+	btnText,
 }) => {
+	const { loginWithGoogle } = useAuth()
+
 	// eslint-disable-next-line
 	const [error, setError] = useState("")
-	// eslint-disable-next-line
 
 	const formik = useFormik({
 		initialValues,
@@ -50,18 +51,16 @@ const AuthForm = ({
 				type={"password"}
 				cls={classes.Input}
 			/>
-
-				<button type="submit"
-					disabled={loading}>
-				{btnText}
-			</button>
-			<button
-				type="button"
-				onClick={handleSignInWithGoogle}
-				disabled={loading}
-			>
-				{btnText2}
-			</button>
+			<SocialLogin
+				type={"submit"}
+				text={btnText}
+				loading={loading}
+			/>
+			<SocialLogin
+				fn={loginWithGoogle}
+				text={"Sign in with Google"}
+				loading={loading}
+			/>
 		</form>
 	)
 }
