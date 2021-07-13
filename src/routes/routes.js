@@ -3,10 +3,7 @@ import {
 	useEffect,
 	useState,
 } from "react"
-import {
-	Route,
-	Switch,
-} from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { commonRoutes } from "./commonRoutes"
 import { privateRoutes } from "./privateRoutes"
 import { publicRoutes } from "./publicRoutes"

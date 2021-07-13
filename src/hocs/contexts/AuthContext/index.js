@@ -11,8 +11,7 @@ import {
 	githubAuthProvider,
 	googleAuthProvider,
 } from "config/firebase"
-import { alertSuccess, alertError, alertWarn} from "components/common/Alert"
-
+import { alertSuccess, alertError, alertWarn} from "components/common/UI/Alert"
 const AuthContext = createContext()
 
 export const useAuth = () => {
