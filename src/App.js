@@ -4,6 +4,8 @@ import { AuthProvider } from "hocs/contexts/AuthContext"
 import { store } from "redux/store"
 import Layout from "hocs/Layout"
 import Routes from "routes/routes"
+import { ToastContainer, Flip } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const App = () => {
 	return (
@@ -14,6 +16,7 @@ const App = () => {
 						<Routes />
 					</Layout>
 				</AuthProvider>
+				<ToastContainer transition={Flip}/>
 			</BrowserRouter>
 		</Provider>
 	)

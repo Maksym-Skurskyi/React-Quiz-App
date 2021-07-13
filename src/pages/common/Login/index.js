@@ -11,19 +11,21 @@ const Login = () => {
 	}
 
 	return (
-		<div className={classes.Auth}>
-			<div>
-				<h1>Authorization</h1>
-				<AuthForm
-					onSubmit={handleSubmit}
-					initialValues={{
-						email: "",
-						password: "",
-					}}
-					btnText={"Sign in"}
-				/>
+		<>
+			<div className={classes.Auth}>
+				<div>
+					<h1>Authorization</h1>
+					<AuthForm
+						onSubmit={handleSubmit}
+						initialValues={{
+							email: "",
+							password: "",
+						}}
+						btnText={"Sign in"}
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

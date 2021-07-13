@@ -13,7 +13,7 @@ const AuthForm = ({
 	loading,
 	btnText,
 }) => {
-	const { googleAuth, githubAuth } = useAuth()
+	const { signInWithGithub, signInWithGoogle } = useAuth()
 
 	// eslint-disable-next-line
 	const [error, setError] = useState("")
@@ -34,39 +34,43 @@ const AuthForm = ({
 	return loading ? (
 		<Loader />
 	) : (
-		<form
-			className={classes.AuthForm}
-			onSubmit={formik.handleSubmit}
-		>
-			{error && (
-				<div className="alert-error">{error}</div>
-			)}
-			<FormInput
-				formik={formik}
-				type={"email"}
-				cls={classes.Input}
-			/>
-			<FormInput
-				formik={formik}
-				type={"password"}
-				cls={classes.Input}
-			/>
+		<div className={classes.authForm}>
+			<form onSubmit={formik.handleSubmit}>
+				{error && (
+					<div className="alert-error">
+						{error}
+					</div>
+				)}
+				<FormInput
+					formik={formik}
+					type={"email"}
+					cls={classes.Input}
+				/>
+				<FormInput
+					formik={formik}
+					type={"password"}
+					cls={classes.Input}
+				/>
+				<button
+					type={"submit"}
+					className={""}
+					loading={loading}
+				>
+					{btnText}
+				</button>
+			</form>
+			<div className={classes.authFormOr}>or</div>
 			<SocialLogin
-				type={"submit"}
-				text={btnText}
-				loading={loading}
-			/>
-			<SocialLogin
-				fn={googleAuth}
+				fn={signInWithGoogle}
 				text={"Sign in with Google"}
 				loading={loading}
 			/>
 			<SocialLogin
-				fn={githubAuth}
+				fn={signInWithGithub}
 				text={"Sign in with Github"}
 				loading={loading}
 			/>
-		</form>
+		</div>
 	)
 }
 
