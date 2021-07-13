@@ -1,4 +1,4 @@
-import axios from "api/quiz"
+import { writeQuiz } from "config/firebaseDatabase"
 import {
 	CREATE_QUIZ_QUESTION,
 	FINISH_CREATE_QUIZ_ERROR,
@@ -32,11 +32,40 @@ export function finishCreateQuizSuccess() {
 	}
 }
 
-export function finishCreateQuiz(quiz) {
+export function finishCreateQuiz(values) {
 	return async (dispatch) => {
 		dispatch(finishCreateQuizStart())
 		try {
-			await axios.post("quiz.json", quiz)
+			const vals = values.questions.map(
+				(question) => {
+					return {
+						question: question.question,
+						id: values.questions.length,
+						rightAnswerId: question.rightAnswerId,
+						answers: [
+							{
+								text: question.option1,
+								id: question.hOption1,
+							},
+							{
+								text: question.option2,
+								id: question.hOption2,
+							},
+							{
+								text: question.option3,
+								id: question.hOption3,
+							},
+							{
+								text: question.option4,
+								id: question.hOption4,
+							},
+						],
+					}
+				}
+			)
+
+			writeQuiz(vals)
+
 			dispatch(finishCreateQuizSuccess())
 		} catch (e) {
 			dispatch(finishCreateQuizError(e))

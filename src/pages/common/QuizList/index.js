@@ -11,10 +11,14 @@ import MetaHelmet from "components/common/UI/Helmet"
 
 const QuizList = () => {
 	const dispatch = useDispatch()
-	
-	const quizes = useSelector(state => state.quizes.quizes)
-	const loading = useSelector(state => state.quizes.loading)
-	
+
+	const quizes = useSelector(
+		(state) => state.quizes.quizes
+	)
+	const loading = useSelector(
+		(state) => state.quizes.loading
+	)
+
 	useEffect(() => {
 		dispatch(fetchQuizes())
 		// eslint-disable-next-line
@@ -36,7 +40,9 @@ const QuizList = () => {
 		<div className={classes.QuizList}>
 			<MetaHelmet
 				title={`Quizes List`}
-				description={"Choose quiz to pass or create your own one"}
+				description={
+					"Choose quiz to pass or create your own one"
+				}
 				keywords={"Quizes list, number of quizes"}
 			/>
 			<h1>Quiz-List</h1>

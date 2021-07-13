@@ -1,5 +1,5 @@
-
 import axios from "api/quiz"
+import { readQuizById } from "config/firebaseDatabase"
 import {
 	FETCH_QUIZES_ERROR,
 	FETCH_QUIZES_START,
@@ -42,12 +42,13 @@ export function fetchQuizById(quizId) {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			const response = await axios.get(
-				`quiz/${quizId}.json`
-			)
-			const quiz = response.data
+			const quiz = readQuizById(quizId)
+			// const response = await axios.get(
+			// 	`quiz/${quizId}.json`
+			// )
+			// const quiz = response.data
 
-			dispatch(fetchQuizSuccess(quiz))
+			await dispatch(fetchQuizSuccess(quiz))
 		} catch (e) {
 			dispatch(fetchQuizesError(e))
 		}
@@ -68,6 +69,8 @@ export function fetchQuizesSuccess(quizes) {
 }
 
 export function fetchQuizSuccess(quiz) {
+	console.log("quiz: ", quiz)
+
 	return {
 		type: FETCH_QUIZ_SUCCESS,
 		quiz,

@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
 		return firebaseAuth
 			.signOut()
 			.then(() => {
-				alertWarn("You are logouted now")
+				alertWarn("You are signed-out now")
 				setLogoutParamsAndRedirect(
 					null,
 					false,
