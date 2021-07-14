@@ -16,6 +16,18 @@ li {
 	padding: 0;
 }
 
+.PageLayout {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.PageLayout main {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
 .Input {
 	margin-bottom: 15px;
 	label {

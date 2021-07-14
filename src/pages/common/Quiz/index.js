@@ -5,7 +5,6 @@ import {
 } from "react-redux"
 import { useParams } from "react-router-dom"
 import {
-	fetchQuizById,
 	fetchQuizesError,
 	fetchQuizesStart,
 	fetchQuizSuccess,
@@ -15,9 +14,9 @@ import ActiveQuiz from "components/quizLayouts/ActiveQuiz"
 import FinishedQuiz from "components/quizLayouts/FinishedQuiz"
 import Loader from "components/common/UI/Loader"
 import classes from "./Quiz.module.scss"
-import MetaHelmet from "components/common/UI/Helmet"
 import { useList } from "react-firebase-hooks/database"
 import { firebaseDatabase } from "config/firebase"
+import PageLayout from "hocs/PageLayout"
 
 const Quiz = () => {
 	const { id } = useParams()
@@ -32,7 +31,7 @@ const Quiz = () => {
 	try {
 		dispatch(fetchQuizesStart())
 		snapshots.map((s) => {
-			quiz.push(s.val())
+			return quiz.push(s.val())
 		})
 		console.log("quiz :>> ", quiz)
 		if (quiz) {
@@ -54,24 +53,27 @@ const Quiz = () => {
 	}
 
 	return (
-		<div className={classes.Quiz}>
-			<MetaHelmet
-				title={`Quiz`}
-				description={"Answering the questions"}
-				keywords={"Pass the quiz, test"}
-			/>
-			<div className={classes.QuizWrapper}>
-				<h1>Answer all the questions</h1>
+		<PageLayout
+			title={`Quiz`}
+			description={"Answering the questions"}
+			keywords={"Pass the quiz, test"}
+		>
+			<div className={classes.Quiz}>
+				<div className={classes.QuizWrapper}>
+					<h1>Answer all the questions</h1>
 
-				{loading || !quiz ? (
-					<Loader />
-				) : isQuizFinished ? (
-					<FinishedQuiz onRetry={getRetryQuiz} />
-				) : (
-					<ActiveQuiz />
-				)}
+					{loading || !quiz ? (
+						<Loader />
+					) : isQuizFinished ? (
+						<FinishedQuiz
+							onRetry={getRetryQuiz}
+						/>
+					) : (
+						<ActiveQuiz />
+					)}
+				</div>
 			</div>
-		</div>
+		</PageLayout>
 	)
 }
 

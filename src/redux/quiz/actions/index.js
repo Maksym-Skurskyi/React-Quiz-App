@@ -1,4 +1,3 @@
-import { readQuizById } from "config/firebaseDatabase"
 import {
 	FETCH_QUIZES_ERROR,
 	FETCH_QUIZES_START,

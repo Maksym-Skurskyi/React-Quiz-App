@@ -1,7 +1,7 @@
 import { useAuth } from "hocs/contexts/AuthContext"
 import AuthForm from "components/forms/AuthForm"
 import classes from "./Auth.module.scss"
-import MetaHelmet from "components/common/UI/Helmet"
+import PageLayout from "hocs/PageLayout"
 
 const Register = () => {
 	const { signup } = useAuth()
@@ -12,25 +12,28 @@ const Register = () => {
 	}
 
 	return (
-		<div className={classes.Auth}>
-			<MetaHelmet
-				title={`Registration`}
-				description={"Complete registation"}
-				keywords={"Registration, sign-up, create account"}
-			/>
-			<div>
-				<h1>Registration</h1>
+		<PageLayout
+			title={`Registration`}
+			description={"Complete registation"}
+			keywords={
+				"Registration, sign-up, create account"
+			}
+		>
+			<div className={classes.Auth}>
+				<div>
+					<h1>Registration</h1>
 
-				<AuthForm
-					onSubmit={handleSubmit}
-					initialValues={{
-						email: "",
-						password: "",
-					}}
-					btnText={"Sign up"}
-				/>
+					<AuthForm
+						onSubmit={handleSubmit}
+						initialValues={{
+							email: "",
+							password: "",
+						}}
+						btnText={"Sign up"}
+					/>
+				</div>
 			</div>
-		</div>
+		</PageLayout>
 	)
 }
 

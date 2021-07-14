@@ -27,10 +27,7 @@ const Drawer = ({ onClose, isOpen }) => {
 				<li key={index}>
 					{link.type === "button" ? (
 						<button
-							onClick={() => {
-								logout()
-								onClose()
-							}}
+							onClick={logout}
 						>
 							{link.label}
 						</button>

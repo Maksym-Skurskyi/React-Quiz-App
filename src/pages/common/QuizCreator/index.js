@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { finishCreateQuiz } from "redux/quizCreate/actions"
 import QuizCreateForm from "components/forms/QuizCreateForm"
 import classes from "./QuizCreator.module.scss"
-import MetaHelmet from "components/common/UI/Helmet"
+import PageLayout from "hocs/PageLayout"
 
 const QuizCreator = () => {
 	const dispatch = useDispatch()
@@ -13,24 +13,25 @@ const QuizCreator = () => {
 	}
 
 	return (
-		<div className={classes.QuizCreator}>
-			<MetaHelmet
-				title={`Creating quiz`}
-				description={
-					"Create a quiz so you or your friends can pass and share it"
-				}
-				keywords={
-					"Quiz creating, create number of quizes, create a few quizes"
-				}
-			/>
-			<div>
-				<h1>Quiz creating</h1>
+		<PageLayout
+			title={`Creating quiz`}
+			description={
+				"Create a quiz so you or your friends can pass and share it"
+			}
+			keywords={
+				"Quiz creating, create number of quizes, create a few quizes"
+			}
+		>
+			<div className={classes.QuizCreator}>
+				<div>
+					<h1>Quiz creating</h1>
 
-				<QuizCreateForm
-					onSubmit={submitHandler}
-				/>
+					<QuizCreateForm
+						onSubmit={submitHandler}
+					/>
+				</div>
 			</div>
-		</div>
+		</PageLayout>
 	)
 }
 
