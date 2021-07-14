@@ -1,3 +1,4 @@
+import { readQuizes } from "config/firebaseDatabase"
 import {
 	FETCH_QUIZES_ERROR,
 	FETCH_QUIZES_START,
@@ -13,7 +14,17 @@ export function fetchQuizes() {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			const quizes = {}
+			const quizes = []
+			await readQuizes().then((results) =>
+				results.map((quiz, index) => {
+					quizes.push({
+						id: quiz.key,
+						name: `${index + 1}. ${
+							quiz.val()[0].question
+						}`,
+					})
+				})
+			)
 			dispatch(fetchQuizesSuccess(quizes))
 		} catch (e) {
 			dispatch(fetchQuizesError(e))

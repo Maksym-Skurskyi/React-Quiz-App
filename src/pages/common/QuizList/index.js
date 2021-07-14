@@ -1,44 +1,43 @@
-import { NavLink } from "react-router-dom"
+import {
+	NavLink,
+	useParams,
+} from "react-router-dom"
 import Loader from "components/common/UI/Loader"
 import classes from "./QuizList.module.scss"
 import { firebaseDatabase } from "config/firebase"
 import { useList } from "react-firebase-hooks/database"
 import {
+	fetchQuizes,
 	fetchQuizesError,
 	fetchQuizesStart,
 	fetchQuizesSuccess,
 } from "redux/quiz/actions"
-import { useDispatch } from "react-redux"
+import {
+	useDispatch,
+	useSelector,
+} from "react-redux"
 import PageLayout from "hocs/PageLayout"
+import { useEffect, useState } from "react"
 
 const QuizList = () => {
+	const [isLoading, setIsLoading] = useState(
+		false
+	)
 	const dispatch = useDispatch()
-	const [snapshots, loading, error] = useList(
-		firebaseDatabase.ref("quiz")
+	const quizes = useSelector(
+		(state) => state.quizes
 	)
 
-	const quizesFromDB = []
-
-	try {
-		dispatch(fetchQuizesStart())
-		snapshots.map((snapshot, index) => {
-			return quizesFromDB.push({
-				id: snapshot.key,
-				name: `${index + 1}. ${
-					snapshot.val()[0].question
-				}`,
-			})
-		})
-		dispatch(fetchQuizesSuccess(quizesFromDB))
-	} catch (e) {
-		dispatch(fetchQuizesError(e))
-		console.log("error :>> ", error)
-	}
+	useEffect(() => {
+		setIsLoading(true)
+		dispatch(fetchQuizes())
+		setIsLoading(false)
+	}, [])
 
 	const renderQuizes = () => {
 		return (
-			quizesFromDB &&
-			quizesFromDB.map((quiz) => {
+			quizes &&
+			quizes.map((quiz) => {
 				return (
 					<li key={quiz.id}>
 						<NavLink to={`/quiz/${quiz.id}`}>
@@ -61,11 +60,11 @@ const QuizList = () => {
 			<div className={classes.QuizList}>
 				<h1>Quiz-List</h1>
 
-				{loading ? (
+				{isLoading ? (
 					<Loader />
 				) : (
 					<ul>
-						{quizesFromDB ? (
+						{quizes ? (
 							renderQuizes()
 						) : (
 							<li>No quizes yet</li>
