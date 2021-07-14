@@ -16,7 +16,7 @@ export const alertSuccess = (text) => {
 }
 
 export const alertError = (text) => {
-	toast.errow(text, alertBody)
+	toast.error(text, alertBody)
 }
 
 export const alertWarn = (text) => {

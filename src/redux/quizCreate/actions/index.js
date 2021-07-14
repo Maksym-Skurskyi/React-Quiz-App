@@ -37,7 +37,7 @@ export function finishCreateQuiz(values) {
 		dispatch(finishCreateQuizStart())
 		try {
 			console.log("values: ", values)
-			const vals = values.questions.map(
+			const questions = values.questions.map(
 				(question, index) => {
 					return {
 						question: question.question,
@@ -66,7 +66,7 @@ export function finishCreateQuiz(values) {
 				}
 			)
 
-			writeQuiz(vals)
+			writeQuiz(questions)
 
 			dispatch(finishCreateQuizSuccess())
 		} catch (e) {

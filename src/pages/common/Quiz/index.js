@@ -5,6 +5,7 @@ import {
 } from "react-redux"
 import { useParams } from "react-router-dom"
 import {
+	fetchQuizById,
 	fetchQuizesError,
 	fetchQuizesStart,
 	fetchQuizSuccess,
@@ -21,32 +22,40 @@ import PageLayout from "hocs/PageLayout"
 const Quiz = () => {
 	const { id } = useParams()
 	const dispatch = useDispatch()
+	const loading = useSelector(
+		(state) => state.quizes.loading
+	)
 	const isQuizFinished = useSelector(
 		(state) => state.quizes.isFinished
 	)
-	const [snapshots, loading, error] = useList(
-		firebaseDatabase.ref(`quiz/${id}`)
+	const quiz = useSelector(
+		(state) => state.quizes.quiz
 	)
-	const quiz = []
-	try {
-		dispatch(fetchQuizesStart())
-		snapshots.map((s) => {
-			return quiz.push(s.val())
-		})
-		console.log("quiz :>> ", quiz)
-		if (quiz) {
-			dispatch(fetchQuizSuccess(quiz))
-		}
-	} catch (e) {
-		dispatch(fetchQuizesError(e))
-		console.log("error :>> ", error)
-	}
+	// const [snapshots, loading, error] = useList(
+	// 	firebaseDatabase.ref(`quiz/${id}`)
+	// )
+
 	useEffect(() => {
+		dispatch(fetchQuizById(id))
 		return () => {
 			dispatch(retryQuiz())
 		}
 		//eslint-disable-next-line
 	}, [])
+
+	// try {
+	// 	dispatch(fetchQuizesStart())
+	// 	snapshots.map((s) => {
+	// 		return quiz.push(s.val())
+	// 	})
+	// 	console.log("quiz :>> ", quiz)
+	// 	if (quiz) {
+	// 		dispatch(fetchQuizSuccess(quiz))
+	// 	}
+	// } catch (e) {
+	// 	dispatch(fetchQuizesError(e))
+	// 	console.log("error :>> ", error)
+	// }
 
 	const getRetryQuiz = () => {
 		dispatch(retryQuiz())
