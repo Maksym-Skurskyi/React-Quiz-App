@@ -19,7 +19,7 @@ const Drawer = ({ onClose, isOpen }) => {
 			onClick: logout,
 		})
 		// eslint-disable-next-line
-	}, [pMenu])
+	}, [])
 
 	const renderLinks = (links) => {
 		return links.map((link, index) => {

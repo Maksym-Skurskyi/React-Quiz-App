@@ -6,6 +6,9 @@ import {
 import { useParams } from "react-router-dom"
 import {
 	fetchQuizById,
+	fetchQuizesError,
+	fetchQuizesStart,
+	fetchQuizSuccess,
 	retryQuiz,
 } from "redux/quiz/actions"
 import ActiveQuiz from "components/quizLayouts/ActiveQuiz"
@@ -13,20 +16,37 @@ import FinishedQuiz from "components/quizLayouts/FinishedQuiz"
 import Loader from "components/common/UI/Loader"
 import classes from "./Quiz.module.scss"
 import MetaHelmet from "components/common/UI/Helmet"
+import { useList } from "react-firebase-hooks/database"
+import { firebaseDatabase } from "config/firebase"
 
 const Quiz = () => {
 	const { id } = useParams()
 	const dispatch = useDispatch()
-	const quizes = useSelector(
-		(state) => state.quizes
+	const isQuizFinished = useSelector(
+		(state) => state.quizes.isFinished
 	)
-
+	const [snapshots, loading, error] = useList(
+		firebaseDatabase.ref(`quiz/${id}`)
+	)
+	const quiz = []
+	try {
+		dispatch(fetchQuizesStart())
+		snapshots.map((s) => {
+			quiz.push(s.val())
+		})
+		console.log("quiz :>> ", quiz)
+		if (quiz) {
+			dispatch(fetchQuizSuccess(quiz))
+		}
+	} catch (e) {
+		dispatch(fetchQuizesError(e))
+		console.log("error :>> ", error)
+	}
 	useEffect(() => {
-		dispatch(fetchQuizById(id))
 		return () => {
 			dispatch(retryQuiz())
 		}
-		// eslint-disable-next-line
+		//eslint-disable-next-line
 	}, [])
 
 	const getRetryQuiz = () => {
@@ -43,9 +63,9 @@ const Quiz = () => {
 			<div className={classes.QuizWrapper}>
 				<h1>Answer all the questions</h1>
 
-				{quizes.loading || !quizes.quiz ? (
+				{loading || !quiz ? (
 					<Loader />
-				) : quizes.isFinished ? (
+				) : isQuizFinished ? (
 					<FinishedQuiz onRetry={getRetryQuiz} />
 				) : (
 					<ActiveQuiz />

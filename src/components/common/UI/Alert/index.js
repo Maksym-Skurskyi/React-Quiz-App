@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 //React-Toastify settings
 export const alertBody = {
 	position: "top-center",
-	autoClose: 2000,
+	autoClose: 5000,
 	hideProgressBar: true,
 	closeOnClick: true,
 	pauseOnHover: true,
@@ -21,4 +21,8 @@ export const alertError = (text) => {
 
 export const alertWarn = (text) => {
 	toast.warn(text, alertBody)
+}
+
+export const alertInfo = (text) => {
+	toast.info(text, alertBody)
 }

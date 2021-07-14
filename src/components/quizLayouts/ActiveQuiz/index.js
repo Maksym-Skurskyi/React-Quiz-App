@@ -6,7 +6,7 @@ const ActiveQuiz = () => {
 	const quizes = useSelector(
 		(state) => state.quizes
 	)
-	console.log("quizes: ", quizes)
+	console.log("quizes :>> ", quizes)
 	const question =
 		quizes.quiz[quizes.activeQuestion].question
 	const quizLength = quizes.quiz.length

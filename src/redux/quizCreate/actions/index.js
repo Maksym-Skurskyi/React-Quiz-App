@@ -36,10 +36,12 @@ export function finishCreateQuiz(values) {
 	return async (dispatch) => {
 		dispatch(finishCreateQuizStart())
 		try {
+			console.log("values: ", values)
 			const vals = values.questions.map(
 				(question) => {
 					return {
 						question: question.question,
+						//problema with id
 						id: values.questions.length,
 						rightAnswerId: question.rightAnswerId,
 						answers: [

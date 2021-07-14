@@ -1,26 +1,56 @@
-import firebase from "firebase"
-import "firebase/database"
+// import firebase from "firebase"
+import { firebaseDatabase } from "./firebase"
 
-const db = () => firebase.database()
+export const writeQuiz = async (quizes) => {
+	try {
+		const quizRef = firebaseDatabase.ref("quiz")
 
-export const writeQuiz = async (quiz) => {
-	// await firebase.database().ref("quiz/").set(quiz)
-	const newPostKey = db()
-		.ref()
-		.child("quiz")
-		.push().key
-	const updates = {}
-	updates["/quiz/" + newPostKey] = quiz
-	return await db().ref().update(updates)
+		quizRef.push(quizes).catch((error) => {
+			console.log("error :>>", error)
+		})
+	} catch (e) {
+		console.log("e :>> ", e)
+	}
 }
-export const readQuizById = (quizId) => {
-	const quiz = db().ref(`quiz/${quizId}`)
-	quiz.on("value", async (snapshot) => {
-		const data = snapshot.val()
-		return await data
-		// updateQuiz(postElement, data)
-	})
-}
+
+// export const readQuizes = async (snapshots, error) => {
+// 	try {
+// 		const quizesFromDB = []
+// 		snapshots.map((snapshot, index) => {
+// 			quizesFromDB.push({
+// 				id: snapshot.key,
+// 				name: `${index}. ${
+// 					snapshot.val()[0].question
+// 				}`,
+// 			})
+// 		})
+// 		return quizesFromDB
+// 	} catch (e) {
+// 		console.log("e :>> ", error)
+// 	}
+// }
+
+// export const readQuizById = (quizId) => {
+// 	try {
+// 		const dbRef = firebaseDatabase.ref()
+// 		dbRef
+// 			.child("quiz")
+// 			.child(quizId)
+// 			.get()
+// 			.then((snapshot) => {
+// 				if (snapshot.exists()) {
+// 					console.log(snapshot.val())
+// 				} else {
+// 					console.log("No data available")
+// 				}
+// 			})
+// 			.catch((error) => {
+// 				console.error(error)
+// 			})
+// 	} catch (e) {
+// 		console.log("e :>> ", e)
+// 	}
+// }
 
 // export const readQuizes = () => {
 // 	const quizes = ref(db, "quiz/")

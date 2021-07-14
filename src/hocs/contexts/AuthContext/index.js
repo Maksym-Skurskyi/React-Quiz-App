@@ -11,7 +11,7 @@ import {
 	githubAuthProvider,
 	googleAuthProvider,
 } from "config/firebase"
-import { alertSuccess, alertError, alertWarn} from "components/common/UI/Alert"
+import { alertSuccess, alertError, alertWarn, alertInfo} from "components/common/UI/Alert"
 const AuthContext = createContext()
 
 export const useAuth = () => {
@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
 		return firebaseAuth
 			.signOut()
 			.then(() => {
-				alertWarn("You are signed-out now")
+				alertInfo("You are signed-out now")
 				setLogoutParamsAndRedirect(
 					null,
 					false,
