@@ -24,7 +24,7 @@ const QuizList = () => {
 		snapshots.map((snapshot, index) => {
 			return quizesFromDB.push({
 				id: snapshot.key,
-				name: `${index}. ${
+				name: `${index + 1}. ${
 					snapshot.val()[0].question
 				}`,
 			})

@@ -5,6 +5,10 @@
 	border-radius: 5px;
 	box-sizing: border-box;
 	margin: 0 10px;
+	a,button{
+		text-decoration: none;
+		width: 100%;
+	}
 	ul {
 		list-style: none;
 		padding: 0;

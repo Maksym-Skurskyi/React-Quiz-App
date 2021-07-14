@@ -38,11 +38,11 @@ export function finishCreateQuiz(values) {
 		try {
 			console.log("values: ", values)
 			const vals = values.questions.map(
-				(question) => {
+				(question, index) => {
 					return {
 						question: question.question,
 						//problema with id
-						id: values.questions.length,
+						id: index + 1,
 						rightAnswerId: question.rightAnswerId,
 						answers: [
 							{

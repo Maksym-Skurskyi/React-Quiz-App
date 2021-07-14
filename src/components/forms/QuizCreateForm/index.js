@@ -239,10 +239,10 @@ const QuizCreateForm = ({ onSubmit }) => {
 											option2: "",
 											option3: "",
 											option4: "",
-											hOption1: "1",
-											hOption2: "2",
-											hOption3: "3",
-											hOption4: "4",
+											hOption1: 1,
+											hOption2: 2,
+											hOption3: 3,
+											hOption4: 4,
 											rightAnswerId: 1,
 										})
 									}

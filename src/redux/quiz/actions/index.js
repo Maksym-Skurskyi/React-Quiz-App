@@ -13,7 +13,6 @@ export function fetchQuizes() {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			//here my fn to get quizes
 			const quizes = {}
 			dispatch(fetchQuizesSuccess(quizes))
 		} catch (e) {
