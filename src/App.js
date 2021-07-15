@@ -3,6 +3,11 @@ import { Provider } from "react-redux"
 import { AuthProvider } from "hocs/contexts/AuthContext"
 import { store } from "redux/store"
 import Routes from "routes/routes"
+import {
+	Flip,
+	ToastContainer,
+} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const App = () => {
 	return (
@@ -11,6 +16,10 @@ const App = () => {
 				<AuthProvider>
 					<Routes />
 				</AuthProvider>
+				<ToastContainer
+					transition={Flip}
+					limit={1}
+				/>
 			</BrowserRouter>
 		</Provider>
 	)

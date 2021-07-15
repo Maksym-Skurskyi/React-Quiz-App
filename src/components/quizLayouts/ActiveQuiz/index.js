@@ -11,7 +11,7 @@ const ActiveQuiz = () => {
 		quizes.quiz[quizes.activeQuestion].question
 	const quizLength = quizes.quiz.length
 	const answerNumber = quizes.activeQuestion + 1
-
+	
 	return (
 		<div className={classes.ActiveQuiz}>
 			<p className={classes.Question}>

@@ -5,6 +5,7 @@ import { privateMenu } from "components/common/menus/privateMenu"
 import { publicMenu } from "components/common/menus/publicMenu"
 import Backdrop from "components/common/UI/Backdrop"
 import classes from "./Drawer.module.scss"
+import { getIsLoggedIn } from "utils/helper"
 
 const Drawer = ({ onClose, isOpen }) => {
 	const { currentUser, logout } = useAuth()
@@ -12,12 +13,12 @@ const Drawer = ({ onClose, isOpen }) => {
 	const pMenu = privateMenu
 
 	useEffect(() => {
-		pMenu.push({
-			label: "Logout",
-			exact: false,
-			type: "button",
-			onClick: logout,
-		})
+		// pMenu.push({
+		// 	label: "Logout",
+		// 	exact: false,
+		// 	type: "button",
+		// 	onClick: logout,
+		// })
 		// eslint-disable-next-line
 	}, [])
 
@@ -25,22 +26,14 @@ const Drawer = ({ onClose, isOpen }) => {
 		return links.map((link, index) => {
 			return (
 				<li key={index}>
-					{link.type === "button" ? (
-						<button
-							onClick={logout}
-						>
-							{link.label}
-						</button>
-					) : (
-						<NavLink
-							to={link.to}
-							exact={link.exact}
-							activeClassName={classes.active}
-							onClick={onClose}
-						>
-							{link.label}
-						</NavLink>
-					)}
+					<NavLink
+						to={link.to}
+						exact={link.exact}
+						activeClassName={classes.active}
+						onClick={onClose}
+					>
+						{link.label}
+					</NavLink>
 				</li>
 			)
 		})
@@ -59,6 +52,13 @@ const Drawer = ({ onClose, isOpen }) => {
 					{currentUser
 						? renderLinks(pMenu)
 						: renderLinks(publicMenu)}
+					{getIsLoggedIn() && (
+						<li>
+							<button onClick={logout}>
+								Logout
+							</button>
+						</li>
+					)}
 				</ul>
 
 				{currentUser ? (

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import {
 	useDispatch,
 	useSelector,
@@ -7,19 +8,19 @@ import classes from "./AnswerItem.module.scss"
 
 const AnswerItem = ({ answer }) => {
 	const dispatch = useDispatch()
-	const state = useSelector(
+	const quizes = useSelector(
 		(state) => state.quizes
 	)
 
 	const onAnswerClick = (answerId) => {
-		dispatch(quizAnswerClick(answerId, state))
+		dispatch(quizAnswerClick(answerId, quizes))
 	}
 
 	const cls = [classes.AnswerItem]
 
-	if (state) {
-		const id = state.activeQuestion + 1
-		cls.push(classes[state.results[id]])
+	if (quizes.answerState) {
+		const id = answer.id
+		cls.push(classes[quizes.answerState[id]])
 	}
 
 	return (

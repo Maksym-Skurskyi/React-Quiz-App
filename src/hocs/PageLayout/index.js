@@ -2,11 +2,6 @@ import { useState } from "react"
 import Drawer from "components/common/Navigation/Drawer"
 import MenuToggle from "components/common/Navigation/MenuToggle"
 import MetaHelmet from "components/common/UI/MetaHelmet"
-import {
-	ToastContainer,
-	Flip,
-} from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 
 const PageLayout = ({
 	showSidebar = true,
@@ -51,10 +46,6 @@ const PageLayout = ({
 				</>
 			)}
 			<main>{children}</main>
-			<ToastContainer
-				transition={Flip}
-				limit={1}
-			/>
 		</div>
 	)
 }

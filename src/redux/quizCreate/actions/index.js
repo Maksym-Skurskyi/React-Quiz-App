@@ -1,3 +1,4 @@
+import { alertError } from "components/common/UI/Alert"
 import { writeQuiz } from "config/firebaseDatabase"
 import {
 	CREATE_QUIZ_QUESTION,
@@ -41,7 +42,6 @@ export function finishCreateQuiz(values) {
 				(question, index) => {
 					return {
 						question: question.question,
-						//problema with id
 						id: index + 1,
 						rightAnswerId: question.rightAnswerId,
 						answers: [
@@ -71,6 +71,7 @@ export function finishCreateQuiz(values) {
 			dispatch(finishCreateQuizSuccess())
 		} catch (e) {
 			dispatch(finishCreateQuizError(e))
+			alertError(e)
 		}
 	}
 }

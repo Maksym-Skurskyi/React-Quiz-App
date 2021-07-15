@@ -11,7 +11,12 @@ import {
 	githubAuthProvider,
 	googleAuthProvider,
 } from "config/firebase"
-import { alertSuccess, alertError, alertWarn, alertInfo} from "components/common/UI/Alert"
+import {
+	alertSuccess,
+	alertError,
+	alertWarn,
+	alertInfo,
+} from "components/common/UI/Alert"
 const AuthContext = createContext()
 
 export const useAuth = () => {
@@ -25,12 +30,17 @@ export const AuthProvider = ({ children }) => {
 
 	const setLoginParamsAndRedirect = useCallback(() => {
 		router.push("/")
-		localStorage.setItem("isLogin", "true")
+		localStorage.setItem("isLogin", 1)
 	}, [router])
 
 	const setLogoutParamsAndRedirect = useCallback(
-		(user, status, route) => {
-			localStorage.setItem("isLogin", status)
+		(user, status, route, remove = false) => {
+			if (remove) {
+				console.log("remove :>> ", remove)
+				localStorage.removeItem("isLogin")
+			} else {
+				localStorage.setItem("isLogin", status)
+			}
 			setCurrentUser(user)
 			setLoading(false)
 			route && router.push(route)
@@ -42,12 +52,13 @@ export const AuthProvider = ({ children }) => {
 		const unsubscribe = firebaseAuth.onAuthStateChanged(
 			(user) => {
 				if (user) {
-					setLogoutParamsAndRedirect(user, true)
+					setLogoutParamsAndRedirect(user, 1)
 				} else {
 					setLogoutParamsAndRedirect(
 						user,
-						false,
-						"/login"
+						0,
+						"/login",
+						true
 					)
 				}
 			}
@@ -66,15 +77,21 @@ export const AuthProvider = ({ children }) => {
 					alertSuccess("Now you are signed up")
 					setLoginParamsAndRedirect()
 				} else {
-					alertWarn("Something went wrong while signing up")
+					alertWarn(
+						"Something went wrong while signing up"
+					)
 					setLogoutParamsAndRedirect(
 						null,
-						false,
+						0,
 						"/login"
 					)
 				}
 			})
-			.catch(() => alertError("Something went wrong while signing up"))
+			.catch(() =>
+				alertError(
+					"Something went wrong while signing up"
+				)
+			)
 	}
 
 	const socialMediaAuth = async (provider) => {
@@ -85,16 +102,20 @@ export const AuthProvider = ({ children }) => {
 					alertSuccess("Now you are signed in")
 					setLoginParamsAndRedirect()
 				} else {
-					alertError("Something went wrong while signing in")
+					alertError(
+						"Something went wrong while signing in"
+					)
 					setLogoutParamsAndRedirect(
 						null,
-						false,
+						0,
 						"/login"
 					)
 				}
 			})
 			.catch(() => {
-				alertError("Something went wrong while signing in")
+				alertError(
+					"Something went wrong while signing in"
+				)
 			})
 	}
 
@@ -111,7 +132,9 @@ export const AuthProvider = ({ children }) => {
 				setLoginParamsAndRedirect()
 			})
 			.catch(() => {
-				alertError("Something went wrong while signing in")
+				alertError(
+					"Something went wrong while signing in"
+				)
 			})
 	}
 	const logout = async () => {
@@ -121,12 +144,15 @@ export const AuthProvider = ({ children }) => {
 				alertInfo("You are signed-out now")
 				setLogoutParamsAndRedirect(
 					null,
-					false,
-					"/login"
+					0,
+					"/login",
+					true
 				)
 			})
 			.catch((e) => {
-				alertError("Something went wrong while signing out")
+				alertError(
+					"Something went wrong while signing out"
+				)
 				console.log(e)
 			})
 	}

@@ -1,18 +1,11 @@
 import { Route, Redirect } from "react-router-dom"
-import { useState } from "react"
-import NotFound from "pages/common/NotFound"
+import { getIsLoggedIn } from "utils/helper"
 
 const PrivateRoute = ({
 	component: Component,
-	denyShowLoginPage,
 	...rest
 }) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(
-		false
-	)
-	setIsLoggedIn(localStorage.getItem("isLogin"))
-
-	if (!isLoggedIn) {
+	if (!getIsLoggedIn()) {
 		return (
 			<Route
 				{...rest}
@@ -25,25 +18,6 @@ const PrivateRoute = ({
 				)}
 			/>
 		)
-	}
-
-	if (isLoggedIn && denyShowLoginPage) {
-		return (
-			<Route
-				{...rest}
-				render={() => (
-					<Redirect
-						to={{
-							pathname: "/",
-						}}
-					/>
-				)}
-			/>
-		)
-	}
-
-	if (isLoggedIn) {
-		return <Route component={NotFound} />
 	}
 
 	return (

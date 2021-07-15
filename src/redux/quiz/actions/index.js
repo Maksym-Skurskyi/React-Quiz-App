@@ -1,7 +1,4 @@
-import {
-	readQuizById,
-	readQuizes,
-} from "config/firebaseDatabase"
+import { alertError } from "components/common/UI/Alert"
 import {
 	FETCH_QUIZES_ERROR,
 	FETCH_QUIZES_START,
@@ -12,17 +9,32 @@ import {
 	QUIZ_RETRY,
 	QUIZ_SET_STATE,
 } from "../types"
+import axios from "api/quiz"
 
 export function fetchQuizes() {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			const quizes = await readQuizes()
+			const response = await axios.get(
+				"quiz.json"
+			)
+
+			const quizes = []
+
+			Object.entries(response.data).forEach(
+				(entry, index) => {
+					console.log("entry :>> ", entry)
+					quizes.push({
+						id: entry[0],
+						name: `${index + 1} ${entry[1][0].question}`,
+					})
+				}
+			)
 
 			dispatch(fetchQuizesSuccess(quizes))
 		} catch (e) {
 			dispatch(fetchQuizesError(e))
-			console.log(e)
+			alertError(e)
 		}
 	}
 }
@@ -31,10 +43,15 @@ export function fetchQuizById(quizId) {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			const quiz = await readQuizById(quizId)
+			const response = await axios.get(
+				`quiz/${quizId}.json`
+			)
+			const quiz = response.data
+
 			dispatch(fetchQuizSuccess(quiz))
 		} catch (e) {
 			dispatch(fetchQuizesError(e))
+			alertError(e)
 		}
 	}
 }

@@ -1,39 +1,27 @@
 import { NavLink } from "react-router-dom"
-import Loader from "components/common/UI/Loader"
-import classes from "./QuizList.module.scss"
-import { fetchQuizes } from "redux/quiz/actions"
 import {
 	useDispatch,
 	useSelector,
 } from "react-redux"
-import PageLayout from "hocs/PageLayout"
+import { useList } from "react-firebase-hooks/database"
 import { useEffect } from "react"
+import Loader from "components/common/UI/Loader"
+import { fetchQuizes } from "redux/quiz/actions"
+import PageLayout from "hocs/PageLayout"
+import classes from "./QuizList.module.scss"
 
 const QuizList = () => {
 	const dispatch = useDispatch()
 	const quizes = useSelector(
 		(state) => state.quizes.quizes
 	)
-	const state = useSelector((state) => state)
-	console.log("state :>> ", state)
 	const loading = useSelector(
 		(state) => state.quizes.loading
 	)
-	console.log("quizesinList :>> ", quizes)
 
 	useEffect(() => {
 		dispatch(fetchQuizes())
 	}, [dispatch])
-
-	const renderQuizes = () => {
-		return quizes.map((quiz) => (
-			<li key={quiz.id}>
-				<NavLink to={`/quiz/${quiz.id}`}>
-					{quiz.name}
-				</NavLink>
-			</li>
-		))
-	}
 
 	return (
 		<PageLayout
@@ -51,7 +39,18 @@ const QuizList = () => {
 				) : (
 					<ul>
 						{quizes ? (
-							renderQuizes()
+							quizes.map((quiz) => {
+								console.log(quiz)
+								return (
+									<li key={quiz.id}>
+										<NavLink
+											to={`/quiz/${quiz.id}`}
+										>
+											{quiz.name}
+										</NavLink>
+									</li>
+								)
+							})
 						) : (
 							<li>No quizes yet</li>
 						)}
