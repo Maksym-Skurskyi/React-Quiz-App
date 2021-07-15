@@ -32,15 +32,7 @@ export function fetchQuizById(quizId) {
 		dispatch(fetchQuizesStart())
 		try {
 			const quiz = await readQuizById(quizId)
-			console.log("quiz ac :>> ", quiz)
-
-			// snapshots.map((s) => {
-			// 	return quiz.push(s.val())
-			// })
-			console.log("quiz :>> ", quiz)
-			if (quiz) {
-				dispatch(fetchQuizSuccess(quiz))
-			}
+			dispatch(fetchQuizSuccess(quiz))
 		} catch (e) {
 			dispatch(fetchQuizesError(e))
 		}

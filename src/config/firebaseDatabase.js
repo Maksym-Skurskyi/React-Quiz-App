@@ -27,11 +27,11 @@ export const readQuizes = async () => {
 				})
 			}
 		)
-
 		console.log(
-			"quizById in DatabaseConfgi: ",
+			"quizes in DatabaseConfgi: ",
 			quizes
 		)
+
 		return quizes
 	})
 	// snapshots.map((snapshot, index) => {
@@ -48,30 +48,16 @@ export const readQuizById = async (quizId) => {
 	const quizRef = firebaseDatabase.ref(
 		`quiz/${quizId}`
 	)
-	const quizes = []
+	// const quizes = []
 	quizRef.on("value", (snapshot) => {
-		const snapshots = snapshot.val()
-		Object.keys(snapshots).forEach(
-			(key, index) => {
-				quizes.push({
-					id: key,
-					name: `Quiz №${index + 1}`,
-				})
-			}
-		)
+		const quiz = snapshot.val()
 
 		console.log(
-			"quizes in DatabaseConfgi: ",
-			quizes
+			"quizById in DatabaseConfgi: ",
+			quiz
 		)
-		return quizes
+
+		return quiz
 	})
-	// snapshots.map((snapshot, index) => {
-	// 	return quizesFromDB.push({
-	// 		id: snapshot.key,
-	// 		name: `${index + 1}. ${
-	// 			snapshot.val()[0].question
-	// 		}`,
-	// 	})
-	// })
+
 }

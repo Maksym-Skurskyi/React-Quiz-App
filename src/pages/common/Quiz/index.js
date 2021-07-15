@@ -6,17 +6,12 @@ import {
 import { useParams } from "react-router-dom"
 import {
 	fetchQuizById,
-	fetchQuizesError,
-	fetchQuizesStart,
-	fetchQuizSuccess,
 	retryQuiz,
 } from "redux/quiz/actions"
 import ActiveQuiz from "components/quizLayouts/ActiveQuiz"
 import FinishedQuiz from "components/quizLayouts/FinishedQuiz"
 import Loader from "components/common/UI/Loader"
 import classes from "./Quiz.module.scss"
-import { useList } from "react-firebase-hooks/database"
-import { firebaseDatabase } from "config/firebase"
 import PageLayout from "hocs/PageLayout"
 
 const Quiz = () => {

@@ -21,6 +21,7 @@ const Routes = () => {
 			<Switch>
 				{!loggedIn
 					? [
+							...privateRoutes,
 							...commonRoutes,
 							...publicRoutes,
 					  ].map((route, index) => {
@@ -32,7 +33,6 @@ const Routes = () => {
 							)
 					  })
 					: [
-							...privateRoutes,
 							...commonRoutes,
 							...publicRoutes,
 					  ].map((route, index) => {

@@ -9,5 +9,6 @@ export const privateRoutes = [
 		component: QuizCreator,
 		path: "/quiz-creator",
 		exact: false,
+		denyShowLoginPage: true
 	},
 ]
