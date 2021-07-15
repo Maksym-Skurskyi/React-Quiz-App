@@ -3,7 +3,6 @@ import {
 	useDispatch,
 	useSelector,
 } from "react-redux"
-import { useList } from "react-firebase-hooks/database"
 import { useEffect } from "react"
 import Loader from "components/common/UI/Loader"
 import { fetchQuizes } from "redux/quiz/actions"
