@@ -26,7 +26,7 @@ const QuizCreateFormOptions = ({
 										<label
 											htmlFor={`questions.${questionIndex}.answers.${optionIndex}.option${optionIndex}`}
 										>
-											Option {optionIndex}
+											Answer {optionIndex}
 										</label>
 										<div
 											className={
@@ -55,6 +55,11 @@ const QuizCreateFormOptions = ({
 													X
 												</button>
 											</div>
+											<ErrorMessage
+										name={`questions.${questionIndex}.answers.${optionIndex}.text`}
+										component="div"
+										className="field-error"
+									/>
 											<div
 												className={
 													classes.optionRadio
@@ -63,22 +68,17 @@ const QuizCreateFormOptions = ({
 												<label
 													htmlFor={`questions.${questionIndex}.rightAnswerId.${optionIndex}`}
 												>
-													Right answer?
+													Is this the correct answer?
 												</label>
 												<Field
 													id={`questions.${questionIndex}.rightAnswerId.${optionIndex}`}
-													className={""}
 													name={`questions.${questionIndex}.rightAnswerId`}
 													type="radio"
 													value={`${optionIndex}`}
 												/>
 											</div>
 										</div>
-										<ErrorMessage
-											name={`questions.${questionIndex}.answers.${optionIndex}.text`}
-											component="div"
-											className="field-error"
-										/>
+										
 									</div>
 								</>
 							)

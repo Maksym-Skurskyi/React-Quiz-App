@@ -1,3 +1,4 @@
+import * as Yup from "yup"
 import {
 	Formik,
 	Field,
@@ -26,6 +27,25 @@ const QuizCreateForm = ({ onSubmit }) => {
 	return (
 		<Formik
 			initialValues={initialValues}
+			validationSchema={Yup.object().shape({
+				questions: Yup.array()
+					.of(
+						Yup.object().shape({
+							question: Yup.string()
+								.min(1, "too short")
+								.required("Write your question"), // these constraints take precedence
+							answers: Yup.array().of(
+								Yup.object().shape({
+									text: Yup.string()
+										.min(1, "too short")
+										.required("Don't leave blank fields, please"), // these constraints take precedence
+									})
+									),
+								})
+								)
+								.required("Must have question") // these constraints are shown if and only if inner constraints are satisfied
+								.min(1, "Minimum of 1 question"),
+							})}
 			onSubmit={onSubmit}
 		>
 			{({ values }) => {
@@ -131,14 +151,9 @@ const QuizCreateForm = ({ onSubmit }) => {
 								</div>
 							)}
 						</FieldArray>
-						<button
-							type="submit"
-						>
+						<button type="submit">
 							Create quiz
 						</button>
-						<pre>
-							{JSON.stringify(values, 0, 2)}
-						</pre>
 					</Form>
 				)
 			}}

@@ -1,4 +1,7 @@
-import { alertError, alertSuccess } from "components/common/UI/Alert"
+import {
+	alertError,
+	alertSuccess,
+} from "components/common/UI/Alert"
 import { writeQuiz } from "config/firebaseDatabase"
 import {
 	CREATE_QUIZ_QUESTION,
@@ -47,7 +50,7 @@ export function finishCreateQuiz(values) {
 							index
 						].answers.map((answer, i) => {
 							return {
-								text: answer.text,
+								text: answer.text.trim(),
 								id: i,
 							}
 						}),
@@ -56,8 +59,10 @@ export function finishCreateQuiz(values) {
 			)
 
 			await writeQuiz(questions)
-			alertSuccess("Quiz has been successfully created!")
 			dispatch(finishCreateQuizSuccess())
+			alertSuccess(
+				"Quiz has been successfully created!"
+			)
 		} catch (e) {
 			dispatch(finishCreateQuizError(e))
 			alertError(e)
