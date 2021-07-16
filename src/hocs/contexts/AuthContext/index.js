@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }) => {
 	const setLogoutParamsAndRedirect = useCallback(
 		(user, status, route, remove = false) => {
 			if (remove) {
-				console.log("remove :>> ", remove)
 				localStorage.removeItem("isLogin")
 			} else {
 				localStorage.setItem("isLogin", status)
@@ -151,9 +150,8 @@ export const AuthProvider = ({ children }) => {
 			})
 			.catch((e) => {
 				alertError(
-					"Something went wrong while signing out"
+					`Something went wrong while signing out, Error: ${e}`
 				)
-				console.log(e)
 			})
 	}
 

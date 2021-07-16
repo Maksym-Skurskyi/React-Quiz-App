@@ -39,7 +39,6 @@ const QuizList = () => {
 					<ul>
 						{quizes ? (
 							quizes.map((quiz) => {
-								console.log(quiz)
 								return (
 									<li key={quiz.id}>
 										<NavLink

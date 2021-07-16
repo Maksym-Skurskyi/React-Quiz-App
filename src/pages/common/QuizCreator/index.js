@@ -7,9 +7,9 @@ import PageLayout from "hocs/PageLayout"
 const QuizCreator = () => {
 	const dispatch = useDispatch()
 
-	const submitHandler = (values) => {
-		console.log("values: ", values)
+	const submitHandler = (values, {resetForm}) => {
 		dispatch(finishCreateQuiz(values))
+		resetForm({})
 	}
 
 	return (

@@ -46,7 +46,7 @@ const FinishedQuiz = ({onRetry}) => {
 				Correct {successCount} of {quiz.length}
 			</p>
 
-			<div>
+			<div className={classes.finishedQuizButtons}>
 				<button onClick={onRetry}>
 					Try again
 				</button>

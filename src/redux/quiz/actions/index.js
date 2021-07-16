@@ -1,4 +1,4 @@
-import { alertError } from "components/common/UI/Alert"
+import axios from "api/quiz"
 import {
 	FETCH_QUIZES_ERROR,
 	FETCH_QUIZES_START,
@@ -9,7 +9,7 @@ import {
 	QUIZ_RETRY,
 	QUIZ_SET_STATE,
 } from "../types"
-import axios from "api/quiz"
+import { alertError } from "components/common/UI/Alert"
 
 export function fetchQuizes() {
 	return async (dispatch) => {
@@ -23,10 +23,11 @@ export function fetchQuizes() {
 
 			Object.entries(response.data).forEach(
 				(entry, index) => {
-					console.log("entry :>> ", entry)
 					quizes.push({
 						id: entry[0],
-						name: `${index + 1} ${entry[1][0].question}`,
+						name: `${index + 1}. ${
+							entry[1][0].question
+						}`,
 					})
 				}
 			)
@@ -123,12 +124,11 @@ export function quizAnswerClick(answerId, state) {
 				return
 			}
 		}
-
 		const question =
 			state.quiz[state.activeQuestion]
 		const results = state.results
 
-		if (question.rightAnswerId === answerId) {
+		if (+question.rightAnswerId === +answerId) {
 			if (!results[question.id]) {
 				results[question.id] = "success"
 			}

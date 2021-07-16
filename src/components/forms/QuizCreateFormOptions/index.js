@@ -74,11 +74,6 @@ const QuizCreateFormOptions = ({
 												/>
 											</div>
 										</div>
-										{/* <Field
-											name={`questions.${questionIndex}.answers.${optionIndex}.id`}
-											value={optionIndex}
-											type="hidden"
-										/> */}
 										<ErrorMessage
 											name={`questions.${questionIndex}.answers.${optionIndex}.text`}
 											component="div"
@@ -94,7 +89,6 @@ const QuizCreateFormOptions = ({
 						onClick={() => {
 							push({
 								text: "",
-								id: "",
 							})
 						}}
 					>

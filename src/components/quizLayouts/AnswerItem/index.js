@@ -19,6 +19,7 @@ const AnswerItem = ({ answer }) => {
 
 	if (quizes.answerState) {
 		const id = answer.id
+
 		cls.push(classes[quizes.answerState[id]])
 	}
 
