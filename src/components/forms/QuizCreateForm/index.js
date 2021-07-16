@@ -263,9 +263,6 @@
 
 // export default QuizCreateForm
 
-import { useState } from "react"
-import { useFormik } from "formik"
-import * as Yup from "yup"
 import {
 	Formik,
 	Field,
@@ -273,7 +270,7 @@ import {
 	ErrorMessage,
 	FieldArray,
 } from "formik"
-import classes from "./QuizCreateForm.module.scss"
+import QuizCreateFormOptions from "../QuizCreateFormOptions"
 
 const QuizCreateForm = ({ onSubmit }) => {
 	// initialValues for quiz creating form with question and list of options
@@ -286,195 +283,129 @@ const QuizCreateForm = ({ onSubmit }) => {
 			},
 		],
 	}
-
 	return (
 		<Formik
 			initialValues={initialValues}
 			onSubmit={onSubmit}
 		>
-			{({ values }) => (
-				<Form>
-					<FieldArray name="questions">
-						{({ remove, push }) => (
-							<div>
-								{values?.questions?.length > 0 &&
-									values?.questions?.map(
-										(question, questionIndex) => (
-											<div
-												className="row"
-												key={questionIndex}
-											>
-												<div className="col">
-													<label
-														htmlFor={`questions.${questionIndex}.question`}
-													>
-														Question
-													</label>
-													<Field
-														name={`questions.${questionIndex}.question`}
-														placeholder="Type your question here"
-														type="textarea"
-													/>
-													<ErrorMessage
-														name={`questions.${questionIndex}.question`}
-														component="div"
-														className="field-error"
-													/>
-												</div>
-
-												<FieldArray
-													name={`questions.${questionIndex}.answers`}
+			{({ values }) => {
+				console.log("values :>> ", values)
+				return (
+					<Form>
+						<FieldArray name="questions">
+							{({ remove, push }) => (
+								<div>
+									{values?.questions?.length >
+										0 &&
+										values?.questions?.map(
+											(
+												question,
+												questionIndex
+											) => (
+												<div
+													className="row"
+													key={questionIndex}
 												>
-													{({ remove, push }) => (
-														<div>
-															{values?.questions[
-																questionIndex
-															]?.answers?.length >
-																0 &&
-																values?.questions[
-																	questionIndex
-																]?.answers?.map(
-																	(
-																		option,
-																		optionIndex
-																	) => (
-																		<>
-																			<div className="col">
-																				<label
-																					htmlFor={`questions.${questionIndex}.answers.${optionIndex}.option${optionIndex}`}
-																				>
-																					Option{" "}
-																					{
-																						optionIndex
-																					}
-																				</label>
-																				<Field
-																					name={`questions.${questionIndex}.answers.${optionIndex}.text`}
-																					placeholder="Type an option here"
-																					type="textarea"
-																				/>
-																				<Field
-																					name={`questions.${questionIndex}.answers.${optionIndex}.id`}
-																					value={
-																						optionIndex
-																					}
-																					type="hidden"
-																				/>
-																				<ErrorMessage
-																					name={`questions.${questionIndex}.answers.${optionIndex}.text`}
-																					component="div"
-																					className="field-error"
-																				/>
+													<div className="col">
+														<label
+															htmlFor={`questions.${questionIndex}.question`}
+														>
+															Question
+														</label>
+														<Field
+															name={`questions.${questionIndex}.question`}
+															placeholder="Type your question here"
+															type="textarea"
+														/>
+														<ErrorMessage
+															name={`questions.${questionIndex}.question`}
+															component="div"
+															className="field-error"
+														/>
+													</div>
 
-																				<button
-																					type="button"
-																					className={
-																						classes.removeOption
-																					}
-																					onClick={() =>
-																						remove(
-																							optionIndex
-																						)
-																					}
-																				>
-																					X
-																				</button>
-																			</div>
-																		</>
-																	)
-																)}
-															<button
-																className={
-																	classes.addOption
-																}
-																type="button"
-																onClick={() => {
-																	push({
-																		text: "",
-																		id: "",
-																	})
-																}}
-															>
-																Add option
-															</button>
-														</div>
-													)}
-												</FieldArray>
-
-												<div className="col">
-													<label
-														htmlFor={`questions.${questionIndex}.rightAnswerId`}
-													>
-														Select
-													</label>
-													<Field
-														as="select"
-														name={`questions.${questionIndex}.rightAnswerId`}
-														type="textarea"
-														style={{
-															width: "100%",
-														}}
-													>
-														<option value="1">
-															1
-														</option>
-														<option value="2">
-															2
-														</option>
-														<option value="3">
-															3
-														</option>
-														<option value="4">
-															4
-														</option>
-													</Field>
-													<ErrorMessage
-														name={`questions.${questionIndex}.select`}
-														component="div"
-														className="field-error"
-													/>
-												</div>
-												<div className="col">
-													<button
-														type="button"
-														className="secondary"
-														onClick={() =>
-															remove(
-																questionIndex
-															)
+													<QuizCreateFormOptions
+														values={values}
+														questionIndex={
+															questionIndex
 														}
-													>
-														X
-													</button>
+													/>
+
+													<div className="col">
+														<label
+															htmlFor={`questions.${questionIndex}.rightAnswerId`}
+														>
+															Select
+														</label>
+														<Field
+															as="select"
+															name={`questions.${questionIndex}.rightAnswerId`}
+															type="textarea"
+															style={{
+																width: "100%",
+															}}
+														>
+															<option value="1">
+																1
+															</option>
+															<option value="2">
+																2
+															</option>
+															<option value="3">
+																3
+															</option>
+															<option value="4">
+																4
+															</option>
+														</Field>
+														<ErrorMessage
+															name={`questions.${questionIndex}.select`}
+															component="div"
+															className="field-error"
+														/>
+													</div>
+													<div className="col">
+														<button
+															type="button"
+															className="secondary"
+															onClick={() =>
+																remove(
+																	questionIndex
+																)
+															}
+														>
+															X
+														</button>
+													</div>
+													<hr className="horizontal" />
 												</div>
-												<hr className="horizontal" />
-											</div>
-										)
-									)}
-								<button
-									type="button"
-									className="secondary"
-									onClick={() =>
-										push({
-											question: "",
-											rightAnswerId: 1,
-											answers: [],
-										})
-									}
-								>
-									Add Question
-								</button>
-							</div>
-						)}
-					</FieldArray>
-					<button type="submit">
-						Create quiz
-					</button>
-					<pre>
-						{JSON.stringify(values, 0, 2)}
-					</pre>
-				</Form>
-			)}
+											)
+										)}
+									<button
+										type="button"
+										className="secondary"
+										onClick={() =>
+											push({
+												question: "",
+												rightAnswerId: 1,
+												answers: [],
+											})
+										}
+									>
+										Add Question
+									</button>
+								</div>
+							)}
+						</FieldArray>
+						<button type="submit">
+							Create quiz
+						</button>
+						<pre>
+							{JSON.stringify(values, 0, 2)}
+						</pre>
+					</Form>
+				)
+			}}
 		</Formik>
 	)
 }
