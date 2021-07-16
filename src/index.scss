@@ -16,6 +16,21 @@ li {
 	padding: 0;
 }
 
+input,
+button {
+	border-radius: 3px;
+	border: 1px solid #eee;
+	outline: none;
+}
+
+.quizCreateBtn {
+	margin-bottom: 15px;
+}
+
+.col {
+	margin: 15px 0;
+}
+
 .PageLayout {
 	height: 100vh;
 	display: flex;
@@ -26,6 +41,23 @@ li {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+}
+
+.optionInputFields {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+	input,
+	label {
+		flex: 1 0 90%;
+	}
+	button {
+		flex: 0 1 10%;
+		background: rgba(255, 0, 0, 0.2);
+		border: 1px solid rgba(255, 0, 0, 0.2);
+		border-radius: 5px;
+	}
 }
 
 .Input {
@@ -100,8 +132,8 @@ button {
 	display: block;
 }
 .horizontal {
-	border: 3px solid #333;
-	margin: 30px 0 10px;
+	border: 1px solid rgba(240, 255, 155, 0.902);
+	margin: 30px 0 20px;
 }
 
 label {
@@ -116,7 +148,6 @@ button {
 	padding: 0;
 	box-sizing: border-box;
 	min-height: 30px;
-	margin-bottom: 15px;
 }
 button {
 	cursor: pointer;

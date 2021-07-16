@@ -1,14 +1,25 @@
-.options__buttons{
+.options__buttons {
 	display: flex;
 	align-items: center;
 }
-input{
+
+.optionInput {
 	position: relative;
+	width: 100%;
+}
+.optionRadio {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+	label {
+		flex: 1 1 100%;
+	}
 }
 
-.buttons{
+
+.buttons {
 	display: flex;
 }
-.hidden{
+.hidden {
 	display: none;
 }

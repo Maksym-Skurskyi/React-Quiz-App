@@ -3,7 +3,6 @@ import {
 	FieldArray,
 	Field,
 	ErrorMessage,
-	replace,
 } from "formik"
 
 const QuizCreateFormOptions = ({
@@ -29,44 +28,62 @@ const QuizCreateFormOptions = ({
 										>
 											Option {optionIndex}
 										</label>
-										<Field
-											name={`questions.${questionIndex}.answers.${optionIndex}.text`}
-											placeholder="Type an option here"
-											type="textarea"
-										/>
-										<Field
+										<div
+											className={
+												classes.optionInput
+											}
+										>
+											<div
+												className={
+													"optionInputFields"
+												}
+											>
+												<Field
+													name={`questions.${questionIndex}.answers.${optionIndex}.text`}
+													placeholder="Type an option here"
+													type="textarea"
+												/>
+												<button
+													type="button"
+													className={
+														classes.removeOption
+													}
+													onClick={() => {
+														remove(optionIndex)
+													}}
+												>
+													X
+												</button>
+											</div>
+											<div
+												className={
+													classes.optionRadio
+												}
+											>
+												<label
+													htmlFor={`questions.${questionIndex}.rightAnswerId.${optionIndex}`}
+												>
+													Right answer?
+												</label>
+												<Field
+													id={`questions.${questionIndex}.rightAnswerId.${optionIndex}`}
+													className={""}
+													name={`questions.${questionIndex}.rightAnswerId`}
+													type="radio"
+													value={`${optionIndex}`}
+												/>
+											</div>
+										</div>
+										{/* <Field
 											name={`questions.${questionIndex}.answers.${optionIndex}.id`}
 											value={optionIndex}
 											type="hidden"
-										/>
+										/> */}
 										<ErrorMessage
 											name={`questions.${questionIndex}.answers.${optionIndex}.text`}
 											component="div"
 											className="field-error"
 										/>
-										<button
-											type="button"
-											className={
-												classes.removeOption
-											}
-											onClick={() => {
-												remove(optionIndex)
-												values?.questions[
-													questionIndex
-												]?.answers?.map(
-													(value, i) => {
-														// const valueId =
-														// 	value.id
-														return replace(
-															`questions.${questionIndex}.answers.${optionIndex}.id`,
-															i
-														)
-													}
-												)
-											}}
-										>
-											X
-										</button>
 									</div>
 								</>
 							)
@@ -77,9 +94,7 @@ const QuizCreateFormOptions = ({
 						onClick={() => {
 							push({
 								text: "",
-								id:
-									values?.questions[questionIndex]
-										?.answers?.length,
+								id: "",
 							})
 						}}
 					>

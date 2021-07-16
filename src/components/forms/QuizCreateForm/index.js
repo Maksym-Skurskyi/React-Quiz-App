@@ -271,6 +271,8 @@ import {
 	FieldArray,
 } from "formik"
 import QuizCreateFormOptions from "../QuizCreateFormOptions"
+// eslint-disable-next-line
+import classes from "./QuizCreateForm.module.scss"
 
 const QuizCreateForm = ({ onSubmit }) => {
 	// initialValues for quiz creating form with question and list of options
@@ -278,17 +280,18 @@ const QuizCreateForm = ({ onSubmit }) => {
 		questions: [
 			{
 				question: "",
-				rightAnswerId: 1,
+				rightAnswerId: "0",
 				answers: [],
 			},
 		],
 	}
+
 	return (
 		<Formik
 			initialValues={initialValues}
 			onSubmit={onSubmit}
 		>
-			{({ values }) => {
+			{({ values, setFieldValue }) => {
 				console.log("values :>> ", values)
 				return (
 					<Form>
@@ -307,11 +310,36 @@ const QuizCreateForm = ({ onSubmit }) => {
 													key={questionIndex}
 												>
 													<div className="col">
-														<label
-															htmlFor={`questions.${questionIndex}.question`}
+														<div
+															className={
+																"optionInputFields"
+															}
 														>
-															Question
-														</label>
+															<label
+																htmlFor={`questions.${questionIndex}.question`}
+															>
+																Question{" "}
+																{questionIndex}
+															</label>
+															<button
+																type="button"
+																className="secondary"
+																onClick={() => {
+																	const doRemove = window.confirm(
+																		"Are you sure?"
+																	)
+																	if (!doRemove) {
+																		return
+																	}
+																	return remove(
+																		questionIndex
+																	)
+																}}
+															>
+																X
+															</button>
+														</div>
+
 														<Field
 															name={`questions.${questionIndex}.question`}
 															placeholder="Type your question here"
@@ -329,71 +357,31 @@ const QuizCreateForm = ({ onSubmit }) => {
 														questionIndex={
 															questionIndex
 														}
+														setFieldValue={
+															setFieldValue
+														}
 													/>
 
-													<div className="col">
-														<label
-															htmlFor={`questions.${questionIndex}.rightAnswerId`}
-														>
-															Select
-														</label>
-														<Field
-															as="select"
-															name={`questions.${questionIndex}.rightAnswerId`}
-															type="textarea"
-															style={{
-																width: "100%",
-															}}
-														>
-															<option value="1">
-																1
-															</option>
-															<option value="2">
-																2
-															</option>
-															<option value="3">
-																3
-															</option>
-															<option value="4">
-																4
-															</option>
-														</Field>
-														<ErrorMessage
-															name={`questions.${questionIndex}.select`}
-															component="div"
-															className="field-error"
-														/>
-													</div>
-													<div className="col">
-														<button
-															type="button"
-															className="secondary"
-															onClick={() =>
-																remove(
-																	questionIndex
-																)
-															}
-														>
-															X
-														</button>
-													</div>
+													<div className="col"></div>
 													<hr className="horizontal" />
 												</div>
 											)
 										)}
-									<button
-										type="button"
-										className="secondary"
-										onClick={() =>
-											push({
-												question: "",
-												rightAnswerId: 1,
-												answers: [],
-											})
-										}
-									>
-										Add Question
-									</button>
+									<div className="quizCreateBtn">
+										<button
+											type="button"
+											className="secondary"
+											onClick={() =>
+												push({
+													question: "",
+													rightAnswerId: "0",
+													answers: [],
+												})
+											}
+										>
+											Add Question
+										</button>
+									</div>
 								</div>
 							)}
 						</FieldArray>
