@@ -111,6 +111,10 @@ button {
 	display: block;
 }
 
+.react-confirm-alert-overlay {
+	background: rgba(0, 0, 0, 0.6) !important;
+}
+
 .alert-success {
 	color: #000;
 	font-size: 2em;

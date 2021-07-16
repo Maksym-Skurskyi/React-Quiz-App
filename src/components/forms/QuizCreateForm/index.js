@@ -270,6 +270,8 @@ import {
 	ErrorMessage,
 	FieldArray,
 } from "formik"
+import { confirmAlert } from "react-confirm-alert"
+import "react-confirm-alert/src/react-confirm-alert.css" // Import css
 import QuizCreateFormOptions from "../QuizCreateFormOptions"
 // eslint-disable-next-line
 import classes from "./QuizCreateForm.module.scss"
@@ -285,6 +287,8 @@ const QuizCreateForm = ({ onSubmit }) => {
 			},
 		],
 	}
+
+	const onRemoveQuestionClick = () => {}
 
 	return (
 		<Formik
@@ -325,15 +329,28 @@ const QuizCreateForm = ({ onSubmit }) => {
 																type="button"
 																className="secondary"
 																onClick={() => {
-																	const doRemove = window.confirm(
-																		"Are you sure?"
-																	)
-																	if (!doRemove) {
-																		return
-																	}
-																	return remove(
-																		questionIndex
-																	)
+																	confirmAlert({
+																		title:
+																			"Confirm to keep going",
+																		message:
+																			"Are you sure you want remove this question with all its options?",
+																		buttons: [
+																			{
+																				label:
+																					"Yes",
+																				onClick: () =>
+																					remove(
+																						questionIndex
+																					),
+																			},
+																			{
+																				label:
+																					"No",
+																				onClick: () =>
+																					null,
+																			},
+																		],
+																	})
 																}}
 															>
 																X
