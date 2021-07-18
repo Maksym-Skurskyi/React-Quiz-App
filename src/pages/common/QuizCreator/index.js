@@ -7,7 +7,10 @@ import PageLayout from "hocs/PageLayout"
 const QuizCreator = () => {
 	const dispatch = useDispatch()
 
-	const submitHandler = (values, {resetForm}) => {
+	const submitHandler = (
+		values,
+		{ resetForm }
+	) => {
 		dispatch(finishCreateQuiz(values))
 		resetForm({})
 	}
@@ -23,7 +26,7 @@ const QuizCreator = () => {
 			}
 		>
 			<div className={classes.QuizCreator}>
-				<div>
+				<div className={"container"}>
 					<h1>Quiz creating</h1>
 
 					<QuizCreateForm

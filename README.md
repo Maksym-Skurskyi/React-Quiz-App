@@ -1,13 +1,14 @@
 # Quiz-app on React
 ## This app is all about the quizes, you may create your own or pass others.
 ### Check how it works here https://quizonreact.web.app/ or read the details below ↓
-![mainPage](https://user-images.githubusercontent.com/77164933/124355548-5b107e00-dc1a-11eb-9d5d-1ceb8dcd09d4.png)
+![list](https://user-images.githubusercontent.com/77164933/126002735-59ad52d7-34a6-4c81-8d5d-7f2cdb15aae2.png)
 ## You can sign up / sign in to create own quizes
 
-### Open menu at the top-left of the screen
-![sidebar](https://user-images.githubusercontent.com/77164933/124355560-6f547b00-dc1a-11eb-8ea2-b381ee4177a3.png)
-### Type your email and password and tap "sign up" or "sign in" if you already had an account  
-![auth](https://user-images.githubusercontent.com/77164933/124355638-e12cc480-dc1a-11eb-8e85-feb1c209a03f.png)
+### Open menu at the top-left of the screen and choose login/register
+``` You can sign in if you already signed up here or with Google/Github```
+![auth](https://user-images.githubusercontent.com/77164933/126002806-6f2be935-a3fa-42b0-b3c2-4a951bc5f37e.png)
+### Type your email and password and tap "sign up" if you are new here
+![reg](https://user-images.githubusercontent.com/77164933/126002845-8c1f35a0-8ec8-426a-a2c1-044d836cb05c.png)
 
 ## Try it now https://quizonreact.web.app/
 
@@ -36,13 +37,23 @@ REACT_APP_FIREBASE_MEASUREMENT_ID=
 You can check the Firebase docs:
 https://firebase.google.com/docs/auth/web/start
 
-Everything is ready to go, just do a few steps:
-1) Turn on Social Login
+Everything is ready to go, if you want to add your Firebase app authorization, just do a few steps to turn it on (Email/Password, Google, Github)
+1) <h3>Go to Authentication tab</h3>
 ![auth](https://user-images.githubusercontent.com/77164933/125080359-63aafd80-e0cd-11eb-9512-07a8f12f293d.png)
-2) Allow to signup and keep Email link disabled
+<!-- * <h3>Repeat after me:</h3><br> -->
+* <h4>Email/Password</h4>
 ![authCheckboxes](https://user-images.githubusercontent.com/77164933/125080542-981eb980-e0cd-11eb-8216-aa17f912603d.png)
-
-
+* <h4>Google</h4>
+![google](https://user-images.githubusercontent.com/77164933/126041765-64194377-ba1a-4406-851c-465d3ed5f01f.png)
+- [Get Cliend ID and Client secret](https://console.cloud.google.com/apis/credentials/)
+![googleAuth](https://user-images.githubusercontent.com/77164933/126042688-d8d46252-a557-448e-b3b8-32f1b383f923.png)
+* <h4>Github</h4>
+![github](https://user-images.githubusercontent.com/77164933/126041798-8b1e083d-7368-4820-ae37-17e560c49960.png)
+To add the Client ID and Client Secret:<br>
+[Register your app](https://github.com/settings/applications/new): as a developer application on GitHub and get your app's OAuth 2.0 Client ID and Client Secret.
+Make sure your Firebase OAuth redirect URI (e.g. my-app-12345.firebaseapp.com/__/auth/handler) is set as your Authorization callback URL in your app's settings page on your GitHub app's config. <br>Then in your github app's settings:
+* Copy and paste client ID
+* Generate Client secret and paste 
 ### Available Scripts
 
 #### `npm start`

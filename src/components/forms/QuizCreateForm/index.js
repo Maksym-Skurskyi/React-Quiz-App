@@ -145,7 +145,7 @@ const QuizCreateForm = ({ onSubmit }) => {
 												})
 											}
 										>
-											Add Question
+											Add question
 										</button>
 									</div>
 								</div>

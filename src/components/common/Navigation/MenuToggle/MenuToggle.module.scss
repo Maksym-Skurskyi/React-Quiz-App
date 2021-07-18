@@ -12,5 +12,10 @@
 	}
 	&.open {
 		left: 320px;
+		@media (max-width: 525px) {
+			left: 300px;
+			width: 20%;
+			display: flex;
+		}
 	}
 }

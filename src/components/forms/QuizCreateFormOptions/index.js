@@ -92,7 +92,7 @@ const QuizCreateFormOptions = ({
 							})
 						}}
 					>
-						Add option
+						Add new answer
 					</button>
 				</div>
 			)}

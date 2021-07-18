@@ -45,7 +45,7 @@ export function finishCreateQuiz(values) {
 					return {
 						question: question.question,
 						id: index + 1,
-						rightAnswerId: question.rightAnswerId,
+						rightAnswerId: +question.rightAnswerId,
 						answers: values.questions[
 							index
 						].answers.map((answer, i) => {

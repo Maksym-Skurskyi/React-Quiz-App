@@ -1,6 +1,5 @@
 import { useAuth } from "hocs/contexts/AuthContext"
 import AuthForm from "components/forms/AuthForm"
-import classes from "./Auth.module.scss"
 import PageLayout from "hocs/PageLayout"
 
 const Register = () => {
@@ -19,8 +18,8 @@ const Register = () => {
 				"Registration, sign-up, create account"
 			}
 		>
-			<div className={classes.Auth}>
-				<div>
+			<div className={"Auth"}>
+				<div className={"container"}>
 					<h1>Registration</h1>
 
 					<AuthForm
