@@ -1,27 +1,28 @@
-import Layout from "./hocs/Layout/Layout"
-import { connect } from "react-redux"
-import { useEffect } from "react"
-import { withRouter } from "react-router-dom"
-import { autoLogin } from "./store/actions/auth"
-import Routes from "./routes/routes"
+import { BrowserRouter } from "react-router-dom"
+import { Provider } from "react-redux"
+import { AuthProvider } from "hocs/contexts/AuthContext"
+import { store } from "redux/store"
+import Routes from "routes/routes"
+import {
+	Flip,
+	ToastContainer,
+} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
-const App = props => {
-	useEffect(() => {
-		props.autoLogin()
-		// eslint-disable-next-line
-	}, [])
-
+const App = () => {
 	return (
-		<Layout>
-			<Routes />
-		</Layout>
+		<Provider store={store}>
+			<BrowserRouter>
+				<AuthProvider>
+					<Routes />
+				</AuthProvider>
+				<ToastContainer
+					transition={Flip}
+					limit={1}
+				/>
+			</BrowserRouter>
+		</Provider>
 	)
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		autoLogin: () => dispatch(autoLogin()),
-	}
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default App

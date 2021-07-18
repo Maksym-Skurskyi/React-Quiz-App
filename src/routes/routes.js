@@ -1,31 +1,41 @@
-import { Suspense } from "react"
-import { connect } from "react-redux"
-import { Redirect, Route, Switch } from "react-router-dom"
-import Loader from "../components/UI/Loader/Loader"
+import {
+	Suspense,
+} from "react"
+import { Route, Switch } from "react-router-dom"
 import { commonRoutes } from "./commonRoutes"
 import { privateRoutes } from "./privateRoutes"
+import { publicRoutes } from "./publicRoutes"
+import Loader from "components/common/UI/Loader"
+import PrivateRoute from "hocs/PrivateRoute"
 
-const Routes = props => {
+const Routes = () => {
 	return (
 		<Suspense fallback={<Loader />}>
 			<Switch>
-				{props.isAuthenticated
-					? privateRoutes.map((route, index) => {
-							return <Route {...route} key={`r_${index}_${route.path}`} />
-					  })
-					: commonRoutes.map((route, index) => {
-							return <Route {...route} key={`r_${index}_${route.path}`} />
-					  })}
-				<Redirect to="/" />
+				{[
+					...privateRoutes,
+					...commonRoutes,
+					...publicRoutes,
+				]?.map((route, index) => {
+					if (route?.isAdminAuth) {
+						return (
+							<PrivateRoute
+								{...route}
+								key={`r_${index}_${route.path}`}
+							/>
+						)
+					}
+
+					return (
+						<Route
+							{...route}
+							key={`r_${index}_${route.path}`}
+						/>
+					)
+				})}
 			</Switch>
 		</Suspense>
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		isAuthenticated: !!state.auth.token,
-	}
-}
-
-export default connect(mapStateToProps, null)(Routes)
+export default Routes

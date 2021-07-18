@@ -1,4 +1,4 @@
-.Quiz{
+.Quiz {
 	display: flex;
 	justify-content: center;
 	padding-top: 100px;
@@ -7,11 +7,15 @@
 	background: linear-gradient(90deg, #5041b2 0%, #7969e6 100%);
 }
 
-.Quiz h1{
+.Quiz h1 {
 	color: #fff;
 	font-size: 3em;
+	@media (max-width: 425px) {
+		font-size: 2em;
+		text-align: center;
+	}
 }
 
-.QuizWrapper{
+.QuizWrapper {
 	width: 600px;
 }
