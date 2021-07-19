@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import AnswersList from "../AnswersList"
 import classes from "./ActiveQuiz.module.scss"
@@ -10,6 +11,10 @@ const ActiveQuiz = () => {
 		quizes.quiz[quizes.activeQuestion].question
 	const quizLength = quizes.quiz.length
 	const answerNumber = quizes.activeQuestion + 1
+
+	useEffect(() => {
+		
+	}, [])
 	
 	return (
 		<div className={classes.ActiveQuiz}>

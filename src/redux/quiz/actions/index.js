@@ -15,22 +15,16 @@ export function fetchQuizes() {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			const response = await axios.get(
-				"quiz.json"
-			)
+			const response = await axios.get("quiz.json")
 
 			const quizes = []
 
-			Object.entries(response.data).forEach(
-				(entry, index) => {
-					quizes.push({
-						id: entry[0],
-						name: `${index + 1}. ${
-							entry[1][0].question
-						}`,
-					})
-				}
-			)
+			Object.entries(response.data).forEach((entry, index) => {
+				quizes.push({
+					id: entry[0],
+					name: `${index + 1}. ${entry[1][0].question}`,
+				})
+			})
 
 			dispatch(fetchQuizesSuccess(quizes))
 		} catch (e) {
@@ -44,9 +38,7 @@ export function fetchQuizById(quizId) {
 	return async (dispatch) => {
 		dispatch(fetchQuizesStart())
 		try {
-			const response = await axios.get(
-				`quiz/${quizId}.json`
-			)
+			const response = await axios.get(`quiz/${quizId}.json`)
 			const quiz = response.data
 
 			dispatch(fetchQuizSuccess(quiz))
@@ -84,10 +76,7 @@ export function fetchQuizesError(e) {
 	}
 }
 
-export function quizSetState(
-	answerState,
-	results
-) {
+export function quizSetState(answerState, results) {
 	return {
 		type: QUIZ_SET_STATE,
 		answerState,
@@ -116,16 +105,25 @@ export function quizNextQuestion(number) {
 
 export function quizAnswerClick(answerId, state) {
 	return (dispatch) => {
+		function timeoutAfterAnswerClicked(time = 1000) {
+			const timeout = window.setTimeout(() => {
+				if (isQuizFinished(state)) {
+					dispatch(finishQuiz())
+				} else {
+					dispatch(quizNextQuestion(state.activeQuestion + 1))
+				}
+
+				window.clearTimeout(timeout)
+			}, time)
+		}
+
 		if (state.answerState) {
-			const key = Object.keys(
-				state.answerState
-			)[0]
-			if (state.answerState[key] === "success") {
+			const key = Object.keys(state.answerState)[0]
+			if (state.answerState[key] === "success" || state.answerState[key] === "error") {
 				return
 			}
 		}
-		const question =
-			state.quiz[state.activeQuestion]
+		const question = state.quiz[state.activeQuestion]
 		const results = state.results
 
 		if (+question.rightAnswerId === +answerId) {
@@ -133,40 +131,22 @@ export function quizAnswerClick(answerId, state) {
 				results[question.id] = "success"
 			}
 
-			dispatch(
-				quizSetState(
-					{ [answerId]: "success" },
-					results
-				)
-			)
+			dispatch(quizSetState({ [answerId]: "success" }, results))
 
-			const timeout = window.setTimeout(() => {
-				if (isQuizFinished(state)) {
-					dispatch(finishQuiz())
-				} else {
-					dispatch(
-						quizNextQuestion(
-							state.activeQuestion + 1
-						)
-					)
-				}
-
-				window.clearTimeout(timeout)
-			}, 1000)
+			timeoutAfterAnswerClicked()
 		} else {
 			results[question.id] = "error"
-			dispatch(
-				quizSetState(
-					{ [answerId]: "error" },
-					results
-				)
-			)
+			//here i need to do smth to add success class to the answer[rightAnswerId]
+			dispatch(quizSetState({[answerId]: "error" }, results))
+			window.setTimeout(() => {
+				dispatch(quizSetState({[answerId]: "error", [question.rightAnswerId]: "success" }, results))
+			}, 700)
+
+			timeoutAfterAnswerClicked(2300)
 		}
 	}
 }
 
 function isQuizFinished(state) {
-	return (
-		state.activeQuestion + 1 === state.quiz.length
-	)
+	return state.activeQuestion + 1 === state.quiz.length
 }

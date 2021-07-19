@@ -1,36 +1,31 @@
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import classes from "./FinishedQuiz.module.scss"
 
-const FinishedQuiz = ({onRetry}) => {
-	const quizes = useSelector(
-		(state) => state.quizes
-	)
+const FinishedQuiz = ({ onRetry }) => {
+	const quizes = useSelector((state) => state.quizes)
+	const [successCount, setSuccessCount] = useState(0)
 
-	const results = quizes.results
-	const quiz = quizes.quiz
+	const {results, quiz} = quizes
 
-	const successCount = Object.keys(
-		results
-	).reduce((total, key) => {
-		if (results[key] === "success") {
-			total++
-		}
+	useEffect(() => {
+		setSuccessCount(
+			Object.keys(results).reduce((total, key) => {
+				if (results[key] === "success") {
+					total++
+				}
 
-		return total
-	}, 0)
+				return total
+			}, 0)
+		)
+	}, [results])
 
 	return (
 		<div className={classes.FinishedQuiz}>
 			<ul>
 				{quiz.map((quizItem, index) => {
-					const cls = [
-						"fa",
-						results[quizItem.id] === "error"
-							? "fa-times"
-							: "fa-check",
-						classes[results[quizItem.id]],
-					]
+					const cls = ["fa", results[quizItem.id] === "error" ? "fa-times" : "fa-check", classes[results[quizItem.id]]]
 
 					return (
 						<li key={index}>
@@ -47,9 +42,7 @@ const FinishedQuiz = ({onRetry}) => {
 			</p>
 
 			<div className={classes.finishedQuizButtons}>
-				<button onClick={onRetry}>
-					Try again
-				</button>
+				<button onClick={onRetry}>Try again</button>
 				<Link to={"/"}>
 					<button>Check other tests</button>
 				</Link>
