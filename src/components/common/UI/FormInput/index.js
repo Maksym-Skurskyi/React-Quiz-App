@@ -1,6 +1,6 @@
 import "./FormInput.module.scss"
 
-const FormInput = ({ formik, type, cls }) => {
+const FormInput = ({ handleChange, handleBlur, values, type, cls }) => {
 	const capFirstLetter = (word) => {
 		return word.charAt(0).toUpperCase() + word.slice(1)
 	}
@@ -12,13 +12,10 @@ const FormInput = ({ formik, type, cls }) => {
 				id={type}
 				name={type}
 				type={type}
-				onChange={formik.handleChange}
-				onBlur={formik.handleBlur}
-				value={formik.values.type}
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.type}
 			/>
-			{formik.touched.type && formik.errors.type ? (
-				<div>{formik.errors.type}</div>
-			) : null}
 		</div>
 	)
 }

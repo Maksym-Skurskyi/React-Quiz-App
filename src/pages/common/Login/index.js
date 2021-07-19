@@ -1,6 +1,6 @@
 import { useAuth } from "hocs/contexts/AuthContext"
 import AuthForm from "components/forms/AuthForm"
-	import PageLayout from "hocs/PageLayout"
+import PageLayout from "hocs/PageLayout"
 
 const Login = () => {
 	const { login } = useAuth()
@@ -16,7 +16,7 @@ const Login = () => {
 			description={"Complete autorization"}
 			keywords={"Authorization, sign-in, login"}
 		>
-			<div className={"Auth"}>
+			<div className={"Auth AuthLogin"}>
 				<div className={"container"}>
 					<h1>Authorization</h1>
 					<AuthForm

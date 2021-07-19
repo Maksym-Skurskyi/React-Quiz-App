@@ -1,11 +1,10 @@
 import { useState } from "react"
-import { useFormik } from "formik"
-import * as Yup from "yup"
-import FormInput from "components/common/UI/FormInput"
+import { ErrorMessage, Field, Form, Formik } from "formik"
 import classes from "./AuthForm.module.scss"
 import Loader from "components/common/UI/Loader"
 import { SocialLogin } from "components/common/UI/SocialLogin"
 import { useAuth } from "hocs/contexts/AuthContext"
+import { authFormValidationSchema } from "./AuthForm.validation"
 
 const AuthForm = ({
 	onSubmit,
@@ -18,59 +17,60 @@ const AuthForm = ({
 	// eslint-disable-next-line
 	const [error, setError] = useState("")
 
-	const formik = useFormik({
-		initialValues,
-		validationSchema: Yup.object({
-			email: Yup.string()
-				.email("Invalid email address")
-				.required("Required"),
-			password: Yup.string()
-				.min(8, "Must be 8 characters at least")
-				.required("Required"),
-		}),
-		onSubmit,
-	})
-
 	return loading ? (
 		<Loader />
 	) : (
-		<div className={classes.authForm}>
-			<form onSubmit={formik.handleSubmit}>
-				{error && (
-					<div className="alert-error">
-						{error}
+		<Formik
+			initialValues={initialValues}
+			validationSchema={authFormValidationSchema}
+			onSubmit={onSubmit}
+		>
+			{() => {
+				return (
+					<div className={classes.authForm}>
+						<Form>
+							<Field
+								name={"email"}
+								placeholder="Type an email here"
+								type="email"
+							/>
+							<ErrorMessage
+								name={"email"}
+								component="div"
+								className="field-error"
+							/>
+							<Field
+								name={"password"}
+								placeholder="Type a password here"
+								type="password"
+							/>
+							<ErrorMessage
+								name={"password"}
+								component="div"
+								className="field-error"
+							/>
+							<button
+								type={"submit"}
+								loading={loading}
+							>
+								{btnText}
+							</button>
+						</Form>
+						<div className={classes.authFormOr}>or</div>
+						<SocialLogin
+							fn={signInWithGoogle}
+							text={"Sign in with Google"}
+							loading={loading}
+						/>
+						<SocialLogin
+							fn={signInWithGithub}
+							text={"Sign in with Github"}
+							loading={loading}
+						/>
 					</div>
-				)}
-				<FormInput
-					formik={formik}
-					type={"email"}
-					cls={classes.Input}
-				/>
-				<FormInput
-					formik={formik}
-					type={"password"}
-					cls={classes.Input}
-				/>
-				<button
-					type={"submit"}
-					className={""}
-					loading={loading}
-				>
-					{btnText}
-				</button>
-			</form>
-			<div className={classes.authFormOr}>or</div>
-			<SocialLogin
-				fn={signInWithGoogle}
-				text={"Sign in with Google"}
-				loading={loading}
-			/>
-			<SocialLogin
-				fn={signInWithGithub}
-				text={"Sign in with Github"}
-				loading={loading}
-			/>
-		</div>
+				)
+			}}
+		</Formik>
 	)
 }
 
