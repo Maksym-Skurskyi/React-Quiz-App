@@ -2,6 +2,7 @@ import firebase from "firebase/app"
 import "firebase/database"
 import "firebase/auth"
 import "firebase/messaging"
+import { alertError } from "components/common/UI/Alert"
 
 export const messagingSender =
 	process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
@@ -32,13 +33,6 @@ export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 
 export const githubAuthProvider = new firebase.auth.GithubAuthProvider()
 
-export const onMessageListener = () =>
-	new Promise((resolve) => {
-		firebaseMessaging.onMessage((payload) => {
-			resolve(payload)
-		})
-	})
-
 export const getToken = async () => {
 	return await firebaseMessaging
 		.getToken({
@@ -58,8 +52,8 @@ export const getToken = async () => {
 			}
 		})
 		.catch((err) => {
-			console.log(
-				"An error occurred while retrieving token. ",
+			alertError(
+				"An error occurred while retrieving token:<br>",
 				err
 			)
 		})

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import Drawer from "components/common/Navigation/Drawer"
 import MenuToggle from "components/common/Navigation/MenuToggle"
 import MetaHelmet from "components/common/UI/MetaHelmet"
@@ -20,6 +20,7 @@ const PageLayout = ({
 	const menuCloseHandler = () => {
 		setMenuIsOpen(false)
 	}
+
 	return (
 		<div className={"PageLayout"}>
 			<MetaHelmet

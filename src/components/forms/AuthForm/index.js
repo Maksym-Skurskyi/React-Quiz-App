@@ -1,10 +1,16 @@
 import { useState } from "react"
-import { ErrorMessage, Field, Form, Formik } from "formik"
+import {
+	ErrorMessage,
+	Field,
+	Form,
+	Formik,
+} from "formik"
 import classes from "./AuthForm.module.scss"
 import Loader from "components/common/UI/Loader"
 import { SocialLogin } from "components/common/UI/SocialLogin"
 import { useAuth } from "hocs/contexts/AuthContext"
 import { authFormValidationSchema } from "./AuthForm.validation"
+import SelectLanguage from "components/common/UI/SelectLanguage"
 
 const AuthForm = ({
 	onSubmit,
@@ -12,7 +18,10 @@ const AuthForm = ({
 	loading,
 	btnText,
 }) => {
-	const { signInWithGithub, signInWithGoogle } = useAuth()
+	const {
+		signInWithGithub,
+		signInWithGoogle,
+	} = useAuth()
 
 	// eslint-disable-next-line
 	const [error, setError] = useState("")
@@ -49,6 +58,7 @@ const AuthForm = ({
 								component="div"
 								className="field-error"
 							/>
+							<SelectLanguage />
 							<button
 								type={"submit"}
 								loading={loading}
@@ -56,7 +66,9 @@ const AuthForm = ({
 								{btnText}
 							</button>
 						</Form>
-						<div className={classes.authFormOr}>or</div>
+						<div className={classes.authFormOr}>
+							or
+						</div>
 						<SocialLogin
 							fn={signInWithGoogle}
 							text={"Sign in with Google"}

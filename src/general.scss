@@ -47,6 +47,14 @@ button {
 	border: 1px solid #eee;
 	outline: none;
 }
+.Toastify {
+	&__toast-body {
+		flex: 1 0 auto;
+	}
+	&__close-button {
+		flex: 0 1 14px;
+	}
+}
 
 .horizontal {
 	border: 1px solid rgba(240, 255, 155, 0.902);
