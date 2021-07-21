@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import { useAuth } from "hocs/contexts/AuthContext"
 import { privateMenu } from "components/common/menus/privateMenu"
@@ -6,21 +5,14 @@ import { publicMenu } from "components/common/menus/publicMenu"
 import Backdrop from "components/common/UI/Backdrop"
 import classes from "./Drawer.module.scss"
 import { getIsLoggedIn } from "utils/helper"
+import { useI18n } from "hocs/contexts/I18nContext"
+import { FormattedMessage } from "react-intl"
 
 const Drawer = ({ onClose, isOpen }) => {
 	const { currentUser, logout } = useAuth()
+	const context = useI18n()
 
 	const pMenu = privateMenu
-
-	useEffect(() => {
-		// pMenu.push({
-		// 	label: "Logout",
-		// 	exact: false,
-		// 	type: "button",
-		// 	onClick: logout,
-		// })
-		// eslint-disable-next-line
-	}, [])
 
 	const renderLinks = (links) => {
 		return links.map((link, index) => {
@@ -55,7 +47,10 @@ const Drawer = ({ onClose, isOpen }) => {
 					{getIsLoggedIn() && (
 						<li>
 							<button onClick={logout}>
-								Logout
+								<FormattedMessage
+									id="app.drawerLogout"
+									defaultMessage="Logout"
+								/>
 							</button>
 						</li>
 					)}
@@ -63,7 +58,10 @@ const Drawer = ({ onClose, isOpen }) => {
 
 				{currentUser ? (
 					<div className={classes.drawer__user}>
-						Signed in
+						<FormattedMessage
+							id="app.drawerSignedIn"
+							defaultMessage="Signed in"
+						/>
 						<span> {currentUser.email}</span>
 					</div>
 				) : (

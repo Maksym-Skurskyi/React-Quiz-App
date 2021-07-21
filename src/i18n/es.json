@@ -1,4 +1,11 @@
 {
 	"app.quizList": "Pasa las pruebas que quieras",
-	"app.quizCreator": "Creador de cuestionarios"
+	"app.quizCreator": "Creador de cuestionarios",
+	"app.drawer": "Lista",
+	"app.drawerLogout": "Cerrar sesión",
+	"app.drawerSignedIn": "Registrado",
+	"app.quizCreateFormQuestionLabel": "Pregunta",
+	"app.quizCreateFormAddQuestionButton": "Agregar pregunta",
+	"app.quizCreateFormCreateQuizButton": "Crear cuestionario",
+	"app.quizCreateFormAddAnswerButton": "Agregar nueva respuesta"
 }

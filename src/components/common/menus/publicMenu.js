@@ -12,5 +12,4 @@ export const publicMenu = [
 		label: "Register",
 		exact: false,
 	},
-
 ]

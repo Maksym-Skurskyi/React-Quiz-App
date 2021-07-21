@@ -1,4 +1,11 @@
 {
 	"app.quizList": "Pass the quizes you want",
-	"app.quizCreator": "Quiz creator"
+	"app.quizCreator": "Quiz creator",
+	"app.drawer": "List",
+	"app.drawerLogout": "Logout",
+	"app.drawerSignedIn": "Signed in",
+	"app.quizCreateFormQuestionLabel": "Question",
+	"app.quizCreateFormAddQuestionButton": "Add question",
+	"app.quizCreateFormCreateQuizButton": "Create quiz",
+	"app.quizCreateFormAddAnswerButton": "Add new answer"
 }

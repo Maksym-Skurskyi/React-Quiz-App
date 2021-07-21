@@ -4,11 +4,14 @@ import {
 	Field,
 	ErrorMessage,
 } from "formik"
+import { FormattedMessage } from "react-intl"
+import { useI18n } from "hocs/contexts/I18nContext"
 
 const QuizCreateFormOptions = ({
 	values,
 	questionIndex,
 }) => {
+	const context = useI18n()
 	return (
 		<FieldArray
 			name={`questions.${questionIndex}.answers`}
@@ -56,10 +59,10 @@ const QuizCreateFormOptions = ({
 												</button>
 											</div>
 											<ErrorMessage
-										name={`questions.${questionIndex}.answers.${optionIndex}.text`}
-										component="div"
-										className="field-error"
-									/>
+												name={`questions.${questionIndex}.answers.${optionIndex}.text`}
+												component="div"
+												className="field-error"
+											/>
 											<div
 												className={
 													classes.optionRadio
@@ -68,7 +71,8 @@ const QuizCreateFormOptions = ({
 												<label
 													htmlFor={`questions.${questionIndex}.rightAnswerId.${optionIndex}`}
 												>
-													Is this the correct answer?
+													Is this the correct
+													answer?
 												</label>
 												<Field
 													id={`questions.${questionIndex}.rightAnswerId.${optionIndex}`}
@@ -78,7 +82,6 @@ const QuizCreateFormOptions = ({
 												/>
 											</div>
 										</div>
-										
 									</div>
 								</>
 							)
@@ -92,7 +95,10 @@ const QuizCreateFormOptions = ({
 							})
 						}}
 					>
-						Add new answer
+						<FormattedMessage
+							id="app.quizCreateFormAddAnswerButton"
+							defaultMessage="Add new answer"
+						/>
 					</button>
 				</div>
 			)}

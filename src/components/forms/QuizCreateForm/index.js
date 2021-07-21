@@ -5,14 +5,17 @@ import {
 	ErrorMessage,
 	FieldArray,
 } from "formik"
+import { useI18n } from "hocs/contexts/I18nContext"
 import { confirmAlert } from "react-confirm-alert"
 import "react-confirm-alert/src/react-confirm-alert.css"
+import { FormattedMessage } from "react-intl"
 import QuizCreateFormOptions from "../QuizCreateFormOptions"
 // eslint-disable-next-line
 import classes from "./QuizCreateForm.module.scss"
 import { quizCreateFormValidationSchema } from "./QuizCreateForm.validation"
 
 const QuizCreateForm = ({ onSubmit }) => {
+	const context = useI18n()
 	// initialValues for quiz creating form with question and list of options
 	const initialValues = {
 		questions: [
@@ -27,7 +30,9 @@ const QuizCreateForm = ({ onSubmit }) => {
 	return (
 		<Formik
 			initialValues={initialValues}
-			validationSchema={quizCreateFormValidationSchema}
+			validationSchema={
+				quizCreateFormValidationSchema
+			}
 			onSubmit={onSubmit}
 		>
 			{({ values }) => {
@@ -36,7 +41,8 @@ const QuizCreateForm = ({ onSubmit }) => {
 						<FieldArray name="questions">
 							{({ remove, push }) => (
 								<div>
-									{values?.questions?.length > 0 &&
+									{values?.questions?.length >
+										0 &&
 										values?.questions?.map(
 											(_, questionIndex) => (
 												<div
@@ -52,7 +58,11 @@ const QuizCreateForm = ({ onSubmit }) => {
 															<label
 																htmlFor={`questions.${questionIndex}.question`}
 															>
-																Question {questionIndex}
+																<FormattedMessage
+																	id="app.quizCreateFormQuestionLabel"
+																	defaultMessage="Question"
+																/>{" "}
+																{questionIndex}
 															</label>
 															<button
 																type="button"
@@ -65,15 +75,18 @@ const QuizCreateForm = ({ onSubmit }) => {
 																			"Are you sure you want to remove this question with all its options?",
 																		buttons: [
 																			{
-																				label: "Yes",
+																				label:
+																					"Yes",
 																				onClick: () =>
 																					remove(
 																						questionIndex
 																					),
 																			},
 																			{
-																				label: "No",
-																				onClick: () => null,
+																				label:
+																					"No",
+																				onClick: () =>
+																					null,
 																			},
 																		],
 																	})
@@ -97,7 +110,9 @@ const QuizCreateForm = ({ onSubmit }) => {
 
 													<QuizCreateFormOptions
 														values={values}
-														questionIndex={questionIndex}
+														questionIndex={
+															questionIndex
+														}
 													/>
 
 													<div className="col"></div>
@@ -117,13 +132,21 @@ const QuizCreateForm = ({ onSubmit }) => {
 												})
 											}
 										>
-											Add question
+											<FormattedMessage
+												id="app.quizCreateFormAddQuestionButton"
+												defaultMessage="Add question"
+											/>
 										</button>
 									</div>
 								</div>
 							)}
 						</FieldArray>
-						<button type="submit">Create quiz</button>
+						<button type="submit">
+							<FormattedMessage
+								id="app.quizCreateFormCreateQuizButton"
+								defaultMessage="Create quiz"
+							/>
+						</button>
 					</Form>
 				)
 			}}
