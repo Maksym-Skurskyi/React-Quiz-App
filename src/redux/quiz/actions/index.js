@@ -138,11 +138,9 @@ export function quizAnswerClick(answerId, state) {
 			results[question.id] = "error"
 			//here i need to do smth to add success class to the answer[rightAnswerId]
 			dispatch(quizSetState({[answerId]: "error" }, results))
-			window.setTimeout(() => {
 				dispatch(quizSetState({[answerId]: "error", [question.rightAnswerId]: "success" }, results))
-			}, 700)
 
-			timeoutAfterAnswerClicked(2300)
+			timeoutAfterAnswerClicked(1200)
 		}
 	}
 }

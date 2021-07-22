@@ -10,7 +10,6 @@ import Loader from "components/common/UI/Loader"
 import { SocialLogin } from "components/common/UI/SocialLogin"
 import { useAuth } from "hocs/contexts/AuthContext"
 import { authFormValidationSchema } from "./AuthForm.validation"
-import SelectLanguage from "components/common/UI/SelectLanguage"
 
 const AuthForm = ({
 	onSubmit,
@@ -58,7 +57,6 @@ const AuthForm = ({
 								component="div"
 								className="field-error"
 							/>
-							<SelectLanguage />
 							<button
 								type={"submit"}
 								loading={loading}

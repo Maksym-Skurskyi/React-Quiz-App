@@ -5,12 +5,9 @@ import { publicMenu } from "components/common/menus/publicMenu"
 import Backdrop from "components/common/UI/Backdrop"
 import classes from "./Drawer.module.scss"
 import { getIsLoggedIn } from "utils/helper"
-import { useI18n } from "hocs/contexts/I18nContext"
-import { FormattedMessage } from "react-intl"
 
 const Drawer = ({ onClose, isOpen }) => {
 	const { currentUser, logout } = useAuth()
-	const context = useI18n()
 
 	const pMenu = privateMenu
 
@@ -47,10 +44,7 @@ const Drawer = ({ onClose, isOpen }) => {
 					{getIsLoggedIn() && (
 						<li>
 							<button onClick={logout}>
-								<FormattedMessage
-									id="app.drawerLogout"
-									defaultMessage="Logout"
-								/>
+								Logout
 							</button>
 						</li>
 					)}
@@ -58,10 +52,7 @@ const Drawer = ({ onClose, isOpen }) => {
 
 				{currentUser ? (
 					<div className={classes.drawer__user}>
-						<FormattedMessage
-							id="app.drawerSignedIn"
-							defaultMessage="Signed in"
-						/>
+						Signed in
 						<span> {currentUser.email}</span>
 					</div>
 				) : (

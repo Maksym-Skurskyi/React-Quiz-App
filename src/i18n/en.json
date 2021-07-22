@@ -1,11 +1,25 @@
 {
-	"app.quizList": "Pass the quizes you want",
-	"app.quizCreator": "Quiz creator",
-	"app.drawer": "List",
-	"app.drawerLogout": "Logout",
-	"app.drawerSignedIn": "Signed in",
-	"app.quizCreateFormQuestionLabel": "Question",
-	"app.quizCreateFormAddQuestionButton": "Add question",
-	"app.quizCreateFormCreateQuizButton": "Create quiz",
-	"app.quizCreateFormAddAnswerButton": "Add new answer"
+	"quizList": {
+		"defaultMessage": "Pass the quizes you want"
+	},
+	"quizCreator": {
+		"defaultMessage": "Quiz creator"
+	},
+	"drawer": { "defaultMessage": "List" },
+	"drawerLogout": { "defaultMessage": "Logout" },
+	"drawerSignedIn": {
+		"defaultMessage": "Signed in"
+	},
+	"quizCreateFormQuestionLabel": {
+		"defaultMessage": "Question"
+	},
+	"quizCreateFormAddQuestionButton": {
+		"defaultMessage": "Add question"
+	},
+	"quizCreateFormCreateQuizButton": {
+		"defaultMessage": "Create quiz"
+	},
+	"quizCreateFormAddAnswerButton": {
+		"defaultMessage": "Add new answer"
+	}
 }

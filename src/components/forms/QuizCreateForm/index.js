@@ -5,17 +5,14 @@ import {
 	ErrorMessage,
 	FieldArray,
 } from "formik"
-import { useI18n } from "hocs/contexts/I18nContext"
 import { confirmAlert } from "react-confirm-alert"
 import "react-confirm-alert/src/react-confirm-alert.css"
-import { FormattedMessage } from "react-intl"
 import QuizCreateFormOptions from "../QuizCreateFormOptions"
 // eslint-disable-next-line
 import classes from "./QuizCreateForm.module.scss"
 import { quizCreateFormValidationSchema } from "./QuizCreateForm.validation"
 
 const QuizCreateForm = ({ onSubmit }) => {
-	const context = useI18n()
 	// initialValues for quiz creating form with question and list of options
 	const initialValues = {
 		questions: [
@@ -58,11 +55,7 @@ const QuizCreateForm = ({ onSubmit }) => {
 															<label
 																htmlFor={`questions.${questionIndex}.question`}
 															>
-																<FormattedMessage
-																	id="app.quizCreateFormQuestionLabel"
-																	defaultMessage="Question"
-																/>{" "}
-																{questionIndex}
+															Question	{questionIndex}
 															</label>
 															<button
 																type="button"
@@ -132,20 +125,14 @@ const QuizCreateForm = ({ onSubmit }) => {
 												})
 											}
 										>
-											<FormattedMessage
-												id="app.quizCreateFormAddQuestionButton"
-												defaultMessage="Add question"
-											/>
+											Add question
 										</button>
 									</div>
 								</div>
 							)}
 						</FieldArray>
 						<button type="submit">
-							<FormattedMessage
-								id="app.quizCreateFormCreateQuizButton"
-								defaultMessage="Create quiz"
-							/>
+							Create quiz
 						</button>
 					</Form>
 				)

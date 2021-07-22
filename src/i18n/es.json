@@ -1,11 +1,27 @@
-{
-	"app.quizList": "Pasa las pruebas que quieras",
-	"app.quizCreator": "Creador de cuestionarios",
-	"app.drawer": "Lista",
-	"app.drawerLogout": "Cerrar sesión",
-	"app.drawerSignedIn": "Registrado",
-	"app.quizCreateFormQuestionLabel": "Pregunta",
-	"app.quizCreateFormAddQuestionButton": "Agregar pregunta",
-	"app.quizCreateFormCreateQuizButton": "Crear cuestionario",
-	"app.quizCreateFormAddAnswerButton": "Agregar nueva respuesta"
+{	
+	"quizList": {
+		"defaultMessage": "Pasa las pruebas que quieras"
+	},
+	"quizCreator": {
+		"defaultMessage": "Creador de cuestionarios"
+	},
+	"drawer": { "defaultMessage": "La lista" },
+	"drawerLogout": {
+		"defaultMessage": "Cerrar sesión"
+	},
+	"drawerSignedIn": {
+		"defaultMessage": "Registrado"
+	},
+	"quizCreateFormQuestionLabel": {
+		"defaultMessage": "Pregunta"
+	},
+	"quizCreateFormAddQuestionButton": {
+		"defaultMessage": "Agregar pregunta"
+	},
+	"quizCreateFormCreateQuizButton": {
+		"defaultMessage": "Crear cuestionario"
+	},
+	"quizCreateFormAddAnswerButton": {
+		"defaultMessage": "Agregar nueva respuesta"
+	}
 }

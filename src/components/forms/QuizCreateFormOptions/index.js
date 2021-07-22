@@ -4,14 +4,11 @@ import {
 	Field,
 	ErrorMessage,
 } from "formik"
-import { FormattedMessage } from "react-intl"
-import { useI18n } from "hocs/contexts/I18nContext"
 
 const QuizCreateFormOptions = ({
 	values,
 	questionIndex,
 }) => {
-	const context = useI18n()
 	return (
 		<FieldArray
 			name={`questions.${questionIndex}.answers`}
@@ -95,10 +92,7 @@ const QuizCreateFormOptions = ({
 							})
 						}}
 					>
-						<FormattedMessage
-							id="app.quizCreateFormAddAnswerButton"
-							defaultMessage="Add new answer"
-						/>
+						Add new answer
 					</button>
 				</div>
 			)}

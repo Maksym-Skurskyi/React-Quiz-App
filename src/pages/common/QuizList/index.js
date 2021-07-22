@@ -8,11 +8,9 @@ import Loader from "components/common/UI/Loader"
 import { fetchQuizes } from "redux/quiz/actions"
 import PageLayout from "hocs/PageLayout"
 import classes from "./QuizList.module.scss"
-import { FormattedMessage } from "react-intl"
-import { useI18n } from "hocs/contexts/I18nContext"
+import { FormattedMessage,defineMessage, useIntl } from "react-intl"
 
 const QuizList = () => {
-	const context = useI18n()
 	const dispatch = useDispatch()
 	const quizes = useSelector(
 		(state) => state.quizes.quizes
@@ -20,7 +18,6 @@ const QuizList = () => {
 	const loading = useSelector(
 		(state) => state.quizes.loading
 	)
-
 	useEffect(() => {
 		dispatch(fetchQuizes())
 	}, [dispatch])
@@ -34,13 +31,7 @@ const QuizList = () => {
 			keywords={"Quizes list, number of quizes"}
 		>
 			<div className={classes.QuizList}>
-				{/* <h1>Quiz-List</h1> */}
-				<h1>
-					<FormattedMessage
-						id="app.quizList"
-						defaultMessage="Welcome to Quiz List"
-					/>
-				</h1>
+				<h1>Quiz-List</h1>
 				{loading ? (
 					<Loader />
 				) : (

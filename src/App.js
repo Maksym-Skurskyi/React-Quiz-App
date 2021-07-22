@@ -8,17 +8,19 @@ import {
 	ToastContainer,
 } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { I18nProvider } from "hocs/contexts/I18nContext"
+import AppIntlProvider from "hocs/AppIntlProvider"
+import SelectLanguage from "components/common/UI/SelectLanguage"
 
 const App = () => {
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
-				<I18nProvider>
+				<AppIntlProvider>
 					<AuthProvider>
 						<Routes />
+						<SelectLanguage/>
 					</AuthProvider>
-				</I18nProvider>
+				</AppIntlProvider>
 				<ToastContainer
 					transition={Flip}
 					limit={1}

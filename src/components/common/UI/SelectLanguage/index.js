@@ -1,18 +1,31 @@
-import { useI18n } from "hocs/contexts/I18nContext"
+import {
+	useDispatch,
+	useSelector,
+} from "react-redux"
 import classes from "./SelectLanguage.module.scss"
+import { setSelectedLanguage } from "redux/language/actions"
 
 const SelectLanguage = () => {
-	const context = useI18n()
+	const dispatch = useDispatch()
+	const currentLanguage =
+		useSelector(
+			(state) =>
+				state.language.selectedLanguage)
+
+	const changeHandler = (e) => {
+		const value = e.target.value
+		dispatch(setSelectedLanguage(value))
+	}
 
 	return (
 		<div className={classes.selectLanguage}>
 			<select
-			value={context.locale}
-			onChange={context.selectLanguage}
-		>
-			<option value="en">English</option>
-			<option value="es">Spanish</option>
-		</select>
+				value={currentLanguage}
+				onChange={changeHandler}
+			>
+				<option value="en">English</option>
+				<option value="es">Spanish</option>
+			</select>
 		</div>
 	)
 }

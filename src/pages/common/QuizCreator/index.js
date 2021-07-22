@@ -3,7 +3,6 @@ import { finishCreateQuiz } from "redux/quizCreate/actions"
 import QuizCreateForm from "components/forms/QuizCreateForm"
 import classes from "./QuizCreator.module.scss"
 import PageLayout from "hocs/PageLayout"
-import { FormattedMessage } from "react-intl"
 
 const QuizCreator = () => {
 	const dispatch = useDispatch()
@@ -29,10 +28,7 @@ const QuizCreator = () => {
 			<div className={classes.QuizCreator}>
 				<div className={"container"}>
 					<h1>
-						<FormattedMessage
-							id="app.quizCreator"
-							defaultMessage="Quiz creator"
-						/>
+						Quiz creator
 					</h1>
 
 					<QuizCreateForm
